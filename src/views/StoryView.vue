@@ -15,20 +15,147 @@
     <div v-if="story" class="max-w-6xl mx-auto">
 
       <!-- HERO -->
-      <div class="relative rounded-[40px] overflow-hidden shadow-2xl">
-        <img :src="story.image" class="w-full h-[500px] object-cover" />
-        <div class="absolute inset-0 bg-black/30"></div>
+      <!-- HERO -->
+//............................
 
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <h1 class="text-5xl md:text-7xl font-extrabold text-white drop-shadow-2xl">
-            {{ story.title }}
-          </h1>
+<!-- HERO -->
+<!-- HERO -->
 
-          <p class="mt-6 text-2xl text-white max-w-3xl leading-10">
-            {{ story.description }}
-          </p>
-        </div>
+
+  <div class="flex justify-center mt-10 mb-8">
+        <button
+          @click="playStoryFromPage"
+          class="px-10 py-5 rounded-full text-2xl font-bold text-white shadow-2xl
+          bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400
+          hover:scale-110 transition"
+        >
+          🎧 Play Story
+        </button>
       </div>
+
+
+
+<!-- HERO -->
+<div class="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white">
+
+  <!-- IMAGE -->
+  <img
+    :src="story.image"
+    class="w-full h-[420px] md:h-[520px] object-cover scale-105"
+  />
+
+  
+
+  <!-- DARK OVERLAY -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+  <!-- 🌈 TOP TITLE (RESPONSIVE) -->
+  <div class="absolute top-4 left-1/2 -translate-x-1/2 w-full px-4 flex justify-center">
+
+    <div class="bg-white/90 backdrop-blur-md px-4 md:px-8 py-2 md:py-4 rounded-full shadow-xl border-2 border-pink-200 text-center animate-float">
+
+      <h1 class="text-xl md:text-4xl font-extrabold text-pink-600">
+        {{ story.title }}
+      </h1>
+
+    </div>
+
+  </div>
+
+  <!-- ⬅ LEFT ARROW -->
+  <button
+    @click="prevPage"
+    class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/90 hover:bg-white shadow-2xl flex items-center justify-center text-2xl md:text-3xl text-purple-600 hover:scale-110 transition"
+  >
+    ❮
+  </button>
+
+  <!-- ➡ RIGHT ARROW -->
+  <button
+    @click="nextPage"
+    class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/90 hover:bg-white shadow-2xl flex items-center justify-center text-2xl md:text-3xl text-purple-600 hover:scale-110 transition"
+  >
+    ❯
+  </button>
+
+  <!-- FLOATING ICONS -->
+  <div class="absolute top-16 left-6 text-3xl md:text-4xl animate-bounce">🌟</div>
+ 
+
+  <!-- 💬 CLOUD STORY TEXT (RESPONSIVE) -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center px-4">
+
+    <div class="relative bg-white/80 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-[40px] shadow-2xl border-4 border-blue-100 max-w-[90%] md:max-w-fit">
+
+      <p class="text-center text-sm md:text-2xl font-semibold text-purple-700 font-[cursive] leading-snug">
+
+        💬
+
+        <transition name="fade" mode="out-in">
+          <div :key="currentPage" class="inline">
+
+            <span
+              v-for="(word, index) in currentSentenceData.words"
+              :key="index"
+              :class="[
+                'inline-block mx-1 px-2 py-1 rounded-xl transition-all duration-300',
+                activeWordIndex === index
+                  ? 'bg-yellow-300 text-purple-900 scale-110 shadow-lg animate-pulse'
+                  : 'text-gray-700'
+              ]"
+            >
+              {{ word.text }}
+            </span>
+
+          </div>
+        </transition>
+
+      </p>
+
+    </div>
+
+    
+
+  </div>
+  
+
+</div>
+
+<!-- 🟦 WHITE INFO BOX UNDER IMAGE -->
+<!-- 🟦 WHITE INFO BOX UNDER IMAGE (COMPACT) -->
+<div class="max-w-4xl mx-auto -mt-6 relative z-10">
+
+  <div class="bg-white rounded-[30px] shadow-xl border-4 border-pink-100 px-6 py-2">
+
+  <div class="flex items-center justify-center gap-4">
+
+    <!-- DOTS -->
+    <div class="flex gap-3 items-center">
+      <div
+        v-for="(p, index) in story.pages"
+        :key="index"
+        @click="goToPage(index)"
+        class="w-4 h-4 rounded-full cursor-pointer transition"
+        :class="currentPage === index ? 'bg-pink-500 scale-125' : 'bg-pink-200'"
+      ></div>
+    </div>
+
+    <!-- TEXT -->
+    <span class="text-sm md:text-lg font-semibold text-purple-700 font-[cursive] whitespace-nowrap">
+      📖 Page {{ currentPage + 1 }} / {{ story.pages.length }}
+    </span>
+
+  </div>
+
+</div>
+
+</div>
+
+  
+
+        
+
+//....................
 
       <!-- PLAY -->
       <div class="flex justify-center mt-10 mb-8">
