@@ -21,28 +21,48 @@
 <!-- HERO -->
 <!-- HERO -->
 
+<!-- PLAY + FULLSCREEN BUTTONS -->
+<div class="flex justify-center gap-4 mt-10 mb-8">
 
-  <div class="flex justify-center mt-10 mb-8">
-        <button
-          @click="playStoryFromPage"
-          class="px-10 py-5 rounded-full text-2xl font-bold text-white shadow-2xl
-          bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400
-          hover:scale-110 transition"
-        >
-          🎧 Play Story
-        </button>
-      </div>
+  <!-- PLAY -->
+  <button
+    @click="playStoryFromPage"
+    class="px-10 py-5 rounded-full text-2xl font-bold text-white shadow-2xl
+    bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400
+    hover:scale-110 transition"
+  >
+    🎧 Play Story
+  </button>
+
+  <!-- FULLSCREEN -->
+  <button
+    @click="toggleHeroFullScreen"
+    class="px-6 py-5 rounded-full text-2xl font-bold text-purple-700 shadow-2xl
+    bg-white hover:scale-110 transition border-2 border-purple-200"
+  >
+    ⛶ Full Screen
+  </button>
+
+</div>
+
+
+  
 
 
 
 <!-- HERO -->
-<div class="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white">
-
+<div
+  ref="heroRef"
+  
+  class="relative overflow-hidden shadow-2xl border-8 border-white
+         w-full h-[420px] md:h-[520px] rounded-[40px]
+         bg-black"
+>
   <!-- IMAGE -->
   <img
     :src="story.image"
-    class="w-full h-[420px] md:h-[520px] object-cover scale-105"
-  />
+>
+    //class="w-full h-[420px] md:h-[520px] object-cover scale-105"
 
   
 
@@ -258,6 +278,32 @@ import { useRoute } from "vue-router"
 import story1 from "../assets/audio/story1.mp3"
 import story2 from "../assets/audio/story2.mp3"
 import story3 from "../assets/audio/story3.mp3"
+
+
+const heroRef = ref(null)
+const isFullScreen = ref(false)
+
+const toggleHeroFullScreen = async () => {
+  const el = heroRef.value
+
+  if (!document.fullscreenElement) {
+    await el.requestFullscreen()
+    stopAudio()
+
+    playStoryFromPage()
+    isFullScreen.value = true
+  } else {
+    await document.exitFullscreen()
+    stopAudio()
+    isFullScreen.value = false
+  }
+}
+
+const heroClass = computed(() =>
+  isFullScreen.value
+    ? "fixed inset-0 w-screen h-screen rounded-none border-0 z-50"
+    : "relative w-full h-[420px] md:h-[520px] rounded-[40px] border-8 border-white"
+)
 
 const route = useRoute()
 
