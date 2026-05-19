@@ -6,6 +6,15 @@
     "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d",
     "color": "text-orange-500"
   },
+
+    {
+    "id": 1,
+    "title": "🦁 Lion",
+    "description": "A brave lion protects the jungle animals.",
+    "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d",
+    "color": "text-orange-500"
+  },
+  
   {
     "id": 2,
     "title": "🐰 Magic Rabbit",

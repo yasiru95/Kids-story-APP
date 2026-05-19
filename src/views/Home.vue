@@ -70,11 +70,11 @@
 import { ref, onMounted } from "vue"
 import HeroSlider from "../components/HeroSlider.vue"
 import StoryCard from "../components/StoryCard.vue"
-import { heroSlides, featuredStories } from "../data/storyData.js"
+import { heroSlides } from "../data/storyData.js"
 
 
 
-const stories = ref([])
+const featuredStories = ref([])
 const loading = ref(true)
 
 const loadStories = async () => {
@@ -92,7 +92,8 @@ const loadStories = async () => {
     const data = await response.json()
 
     // pass data to model
-    stories.value = data
+    featuredStories.value = data
+    console.log("Loaded stories:", featuredStories.value) // log the loaded stories
   } catch (error) {
     console.log(error)
   } finally {
@@ -116,7 +117,7 @@ const prevHero = () => {
 }
 
 const nextFeatured = () => {
-  if (featuredIndex.value < featuredStories.length - 3) {
+  if (featuredIndex.value < featuredStories.value.length - 3) {
     featuredIndex.value++
   }
 }
