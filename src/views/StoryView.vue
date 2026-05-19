@@ -1,7 +1,6 @@
 ﻿<template>
-  <div
-    class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-10 px-4 overflow-hidden"
-  >
+  <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-10 px-4 overflow-hidden">
+
     <!-- BACK -->
     <div class="max-w-7xl mx-auto mb-6">
       <router-link
@@ -12,10 +11,10 @@
       </router-link>
     </div>
 
-    <!-- STORY FOUND -->
+    <!-- STORY -->
     <div v-if="story" class="max-w-6xl mx-auto">
 
-      <!-- HERO IMAGE -->
+      <!-- HERO -->
       <div class="relative rounded-[40px] overflow-hidden shadow-2xl">
         <img :src="story.image" class="w-full h-[500px] object-cover" />
         <div class="absolute inset-0 bg-black/30"></div>
@@ -31,7 +30,7 @@
         </div>
       </div>
 
-      <!-- 🎧 CUTE PLAY STORY BUTTON -->
+      <!-- PLAY -->
       <div class="flex justify-center mt-10 mb-8">
         <button
           @click="playStoryFromPage"
@@ -54,7 +53,7 @@
           ❮
         </button>
 
-        <!-- BOOK -->
+        <!-- CONTENT -->
         <div class="bg-white rounded-[40px] shadow-2xl p-6 md:p-12 max-w-4xl mx-auto border-[12px] border-pink-200 relative">
 
           <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-yellow-300 px-8 py-2 rounded-full text-2xl shadow-lg">
@@ -68,14 +67,22 @@
                 Page {{ currentPage + 1 }}
               </h2>
 
-              <div class="mt-10 text-2xl leading-[60px] text-gray-700 text-center font-medium">
-                <p
-                  v-for="(line, index) in story.pages[currentPage]"
+           
+
+              <!-- WORD HIGHLIGHT -->
+              <div class="text-3xl leading-[70px] text-center font-medium">
+                <span
+                  v-for="(word, index) in currentSentenceData.words"
                   :key="index"
-                  class="mb-6"
+                  :class="[
+                    'inline-block mx-1 px-3 py-1 rounded-2xl transition-all duration-300',
+                    activeWordIndex === index
+                      ? 'bg-yellow-300 text-purple-900 scale-125 shadow-xl animate-pulse'
+                      : 'text-gray-700'
+                  ]"
                 >
-                  {{ line }}
-                </p>
+                  {{ word.text }}
+                </span>
               </div>
 
             </div>
@@ -101,72 +108,19 @@
         >
           ❯
         </button>
-        
 
       </div>
     </div>
 
-      <!-- STORY NOT FOUND -->
-    <div
-      v-else
-      class="min-h-[80vh] flex items-center justify-center px-6"
-    >
-
-      <div
-        class="bg-white max-w-3xl w-full rounded-[40px] shadow-2xl p-10 md:p-16 text-center border-[12px] border-pink-200 relative overflow-hidden"
-      >
-
-        <!-- FLOATING EMOJIS -->
-        <div class="absolute top-6 left-6 text-5xl animate-bounce">
-          🐻
-        </div>
-
-        <div class="absolute top-10 right-10 text-5xl animate-pulse">
-          🌈
-        </div>
-
-        <div class="absolute bottom-8 left-10 text-5xl animate-bounce">
-          ⭐
-        </div>
-
-        <div class="absolute bottom-6 right-6 text-5xl animate-pulse">
-          🦄
-        </div>
-
-        <!-- EMOJI -->
-        <div class="text-8xl mb-8">
-          📚😢
-        </div>
-
-        <!-- TITLE -->
-        <h1
-          class="text-5xl md:text-6xl font-extrabold text-pink-500"
-        >
-          Oops!
-        </h1>
-
-        <!-- MESSAGE -->
-        <p
-          class="mt-8 text-2xl leading-10 text-gray-700"
-        >
-          This magical story could not be found.
-          <br />
-          Maybe the story flew away with fairy dust ✨
-        </p>
-
-        <!-- BUTTON -->
-        <router-link
-          to="/"
-          class="mt-10 inline-block bg-gradient-to-r from-pink-500 to-purple-500 text-white px-10 py-5 rounded-full text-2xl font-bold shadow-2xl hover:scale-110 transition"
-        >
-          🏠 Go Back Home
-        </router-link>
-
+    <!-- NOT FOUND -->
+    <div v-else class="min-h-[80vh] flex items-center justify-center px-6">
+      <div class="bg-white max-w-3xl w-full rounded-[40px] shadow-2xl p-10 text-center border-[12px] border-pink-200">
+        <div class="text-8xl mb-8">📚😢</div>
+        <h1 class="text-5xl font-extrabold text-pink-500">Oops!</h1>
+        <p class="mt-8 text-2xl">Story not found</p>
       </div>
-
     </div>
 
-    
   </div>
 </template>
 
@@ -181,9 +135,13 @@ import story3 from "../assets/audio/story3.mp3"
 const route = useRoute()
 
 const currentPage = ref(0)
-const currentAudio = ref(null)
+const currentSentence = ref(0)
+const activeWordIndex = ref(-1)
 
-/* ================= STORY DATA ================= */
+let animationFrame = null
+let currentAudio = null
+
+/* ================= STORY ================= */
 const stories = [
   {
     id: 1,
@@ -191,71 +149,224 @@ const stories = [
     description: "A brave lion protects all jungle animals.",
     image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d",
     pages: [
-      [
-        "The little rabbit woke up in the green forest.",
-        "He saw the sun shining through the tall trees.",
-        "A gentle wind moved the soft leaves.",
-      ],
-      [
-        "The rabbit met a small brown squirrel on a branch.",
-        "They shared some sweet berries together.",
-        "They became happy friends in the forest.",
-      ],
-      [
-        "A big rain started falling in the evening sky.",
-        "The rabbit and squirrel ran into a cozy tree hole.",
-        "They stayed safe and listened to the rain together.",
-      ],
-    ],
-  },
+      {
+        audio: story1,
+        sentences: [
+          {
+            text: "The little rabbit woke up in the green forest.",
+            words: [
+              { text: "The", start: 0, end: 0.4 },
+              { text: "little", start: 0.4, end: 0.9 },
+              { text: "rabbit", start: 0.9, end: 1.4 },
+              { text: "woke", start: 1.4, end: 1.8 },
+              { text: "up", start: 1.8, end: 2.2 },
+              { text: "in", start: 2.2, end: 2.6 },
+              { text: "the", start: 2.6, end: 3.0 },
+              { text: "green", start: 3.0, end: 3.5 },
+              { text: "forest.", start: 3.5, end: 4.2 },
+            ],
+          },
+          {
+            text: "He saw the sun shining through the tall trees.",
+            words: [
+              { text: "He", start: 4.3, end: 4.6 },
+              { text: "saw", start: 4.6, end: 4.9 },
+              { text: "the", start: 4.9, end: 5.1 },
+              { text: "sun", start: 5.1, end: 5.4 },
+              { text: "shining", start: 5.4, end: 5.9 },
+            ],
+          },
+          {
+            text: "A gentle wind moved the soft leaves.",
+            words: [
+              { text: "A", start: 6.0, end: 6.2 },
+              { text: "gentle", start: 6.2, end: 6.6 },
+              { text: "wind", start: 6.6, end: 7.0 },
+              { text: "moved", start: 7.0, end: 7.4 },
+              { text: "leaves.", start: 7.4, end: 7.9 },
+            ],
+          }
+        ]
+      },
+      {
+        audio: story2,
+        sentences: [
+          {
+            text: "The rabbit met a small brown squirrel on a branch.",
+            words: [
+              { text: "The", start: 0, end: 0.4 },
+              { text: "rabbit", start: 0.4, end: 0.9 },
+              { text: "met", start: 0.9, end: 1.2 },
+              { text: "a", start: 1.2, end: 1.4 },
+              { text: "squirrel", start: 1.4, end: 2.0 },
+            ],
+          },
+          {
+            text: "They shared some sweet berries together.",
+            words: [
+              { text: "They", start: 2.0, end: 2.4 },
+              { text: "shared", start: 2.4, end: 2.8 },
+              { text: "berries", start: 2.8, end: 3.2 },
+            ],
+          },
+          {
+            text: "They became happy friends in the forest.",
+            words: [
+              { text: "They", start: 3.2, end: 3.5 },
+              { text: "became", start: 3.5, end: 3.9 },
+              { text: "friends.", start: 3.9, end: 4.4 },
+            ],
+          }
+        ]
+      },
+      {
+        audio: story3,
+        sentences: [
+          {
+            text: "A big rain started falling in the evening sky.",
+            words: [
+              { text: "A", start: 0, end: 0.3 },
+              { text: "big", start: 0.3, end: 0.7 },
+              { text: "rain", start: 0.7, end: 1.1 },
+              { text: "started", start: 1.1, end: 1.7 },
+              { text: "falling.", start: 1.7, end: 2.4 },
+            ],
+          },
+          {
+            text: "The rabbit and squirrel ran into a cozy tree hole.",
+            words: [
+              { text: "The", start: 2.4, end: 2.7 },
+              { text: "rabbit", start: 2.7, end: 3.1 },
+              { text: "ran", start: 3.1, end: 3.5 },
+              { text: "hole.", start: 3.5, end: 4.0 },
+            ],
+          },
+          {
+            text: "They stayed safe and listened to the rain together.",
+            words: [
+              { text: "They", start: 4.0, end: 4.3 },
+              { text: "stayed", start: 4.3, end: 4.7 },
+              { text: "safe.", start: 4.7, end: 5.2 },
+            ],
+          }
+        ]
+      }
+    ]
+  }
 ]
 
-/* ================= FIND STORY ================= */
+/* ================= STORY ================= */
 const story = computed(() =>
   stories.find((s) => s.id === Number(route.params.id))
 )
 
-/* ================= AUDIO PER PAGE ================= */
-const audioList = [story1, story2, story3]
+/* ================= CURRENT SENTENCE ================= */
+const currentSentenceData = computed(() => {
+  return story.value.pages[currentPage.value].sentences[currentSentence.value]
+})
 
+/* ================= AUDIO ================= */
 const playStoryFromPage = () => {
-  if (!story.value) return
-
-  playAudio(audioList[currentPage.value])
+  playAudio(story.value.pages[currentPage.value].audio)
 }
 
 const playAudio = (audioFile) => {
-  if (currentAudio.value) {
-    currentAudio.value.pause()
-    currentAudio.value.currentTime = 0
+  stopAudio()
+
+  const page = story.value.pages[currentPage.value]
+  const audio = new Audio(audioFile)
+  currentAudio = audio
+
+  currentSentence.value = 0
+  activeWordIndex.value = -1
+
+  audio.play()
+
+  const sync = () => {
+    const time = audio.currentTime
+    const sentence = page.sentences[currentSentence.value]
+
+    if (!sentence) return
+
+    // sentence switch
+    for (let i = 0; i < page.sentences.length; i++) {
+      const last = page.sentences[i].words.at(-1)
+      if (time <= last.end) {
+        currentSentence.value = i
+        break
+      }
+    }
+
+    const words = sentence.words
+
+    let index = words.length - 1
+    for (let i = 0; i < words.length; i++) {
+      if (time < words[i].end) {
+        index = i
+        break
+      }
+    }
+
+    activeWordIndex.value = index
+
+    animationFrame = requestAnimationFrame(sync)
   }
 
-  currentAudio.value = new Audio(audioFile)
-  currentAudio.value.play()
+  sync()
+
+  audio.onended = () => {
+    stopAudio()
+
+    if (currentPage.value < story.value.pages.length - 1) {
+      setTimeout(() => {
+        currentPage.value++
+        playStoryFromPage()
+      }, 1200)
+    }
+  }
 }
 
-/* ================= NAVIGATION ================= */
+/* ================= STOP ================= */
+const stopAudio = () => {
+  if (currentAudio) {
+    currentAudio.pause()
+    currentAudio.currentTime = 0
+  }
+
+  currentAudio = null
+  activeWordIndex.value = -1
+
+  if (animationFrame) cancelAnimationFrame(animationFrame)
+}
+
+/* ================= NAV ================= */
 const nextPage = () => {
   if (currentPage.value < story.value.pages.length - 1) {
     currentPage.value++
+    stopAudio()
   }
 }
 
 const prevPage = () => {
   if (currentPage.value > 0) {
     currentPage.value--
+    stopAudio()
   }
 }
 
-const goToPage = (index) => {
-  currentPage.value = index
+const goToPage = (i) => {
+  currentPage.value = i
+  currentSentence.value = 0
+  stopAudio()
 }
 
-/* reset */
+/* RESET */
 watch(
   () => route.params.id,
   () => {
     currentPage.value = 0
+    currentSentence.value = 0
+    stopAudio()
   }
 )
 </script>
