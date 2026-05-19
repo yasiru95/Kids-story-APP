@@ -14,15 +14,10 @@
     <!-- STORY -->
     <div v-if="story" class="max-w-6xl mx-auto">
 
-      <!-- HERO -->
-      <!-- HERO -->
-//............................
 
-<!-- HERO -->
-<!-- HERO -->
 
 <!-- PLAY + FULLSCREEN BUTTONS -->
-<div class="flex justify-center gap-4 mt-10 mb-8">
+<div class="flex justify-center gap-4  mb-8">
 
   <!-- PLAY -->
   <button
@@ -175,88 +170,10 @@
 
         
 
-//....................
 
-      <!-- PLAY -->
-      <div class="flex justify-center mt-10 mb-8">
-        <button
-          @click="playStoryFromPage"
-          class="px-10 py-5 rounded-full text-2xl font-bold text-white shadow-2xl
-          bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400
-          hover:scale-110 transition"
-        >
-          🎧 Play Story
-        </button>
-      </div>
+      
 
-      <!-- BOOK -->
-      <div class="mt-16 relative">
-
-        <!-- LEFT -->
-        <button
-          @click="prevPage"
-          class="absolute left-0 md:-left-8 top-1/2 -translate-y-1/2 z-30 w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-3xl shadow-2xl hover:scale-110 transition"
-        >
-          ❮
-        </button>
-
-        <!-- CONTENT -->
-        <div class="bg-white rounded-[40px] shadow-2xl p-6 md:p-12 max-w-4xl mx-auto border-[12px] border-pink-200 relative">
-
-          <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-yellow-300 px-8 py-2 rounded-full text-2xl shadow-lg">
-            📖 Story Book
-          </div>
-
-          <transition name="fade" mode="out-in">
-            <div :key="currentPage" class="min-h-[350px] flex flex-col justify-center">
-
-              <h2 class="text-4xl font-extrabold text-purple-700 text-center">
-                Page {{ currentPage + 1 }}
-              </h2>
-
-           
-
-              <!-- WORD HIGHLIGHT -->
-              <div class="text-3xl leading-[70px] text-center font-medium">
-                <span
-                  v-for="(word, index) in currentSentenceData.words"
-                  :key="index"
-                  :class="[
-                    'inline-block mx-1 px-3 py-1 rounded-2xl transition-all duration-300',
-                    activeWordIndex === index
-                      ? 'bg-yellow-300 text-purple-900 scale-125 shadow-xl animate-pulse'
-                      : 'text-gray-700'
-                  ]"
-                >
-                  {{ word.text }}
-                </span>
-              </div>
-
-            </div>
-          </transition>
-
-          <!-- DOTS -->
-          <div class="flex justify-center gap-3 mt-8">
-            <div
-              v-for="(p, index) in story.pages"
-              :key="index"
-              @click="goToPage(index)"
-              class="w-5 h-5 rounded-full cursor-pointer transition"
-              :class="currentPage === index ? 'bg-pink-500 scale-125' : 'bg-pink-200'"
-            ></div>
-          </div>
-
-        </div>
-
-        <!-- RIGHT -->
-        <button
-          @click="nextPage"
-          class="absolute right-0 md:-right-8 top-1/2 -translate-y-1/2 z-30 w-16 h-16 rounded-full bg-gradient-to-r from-pink-500 to-yellow-400 text-white text-3xl shadow-2xl hover:scale-110 transition"
-        >
-          ❯
-        </button>
-
-      </div>
+      
     </div>
 
     <!-- NOT FOUND -->
