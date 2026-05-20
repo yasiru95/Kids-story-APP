@@ -12,39 +12,41 @@
           {
             "text": "The little rabbit woke up in the green forest.",
             "words": [
-              { "text": "The", "start": 0, "end": 0.4 },
-  { "text": "little", "start": 0.4, "end": 0.9 },
-  { "text": "rabbit", "start": 0.9, "end": 1.4 },
-  { "text": "woke", "start": 1.4, "end": 1.8 },
-  { "text": "up", "start": 1.8, "end": 2.2 },
-  { "text": "in", "start": 2.2, "end": 2.6 },
-  { "text": "the", "start": 2.6, "end": 3.0 },
-  { "text": "green", "start": 3.0, "end": 3.5 },
-  { "text": "forest.", "start": 3.5, "end": 4.2 }
+               { "text": "The", "start": 0.032, "end": 0.129 },
+        { "text": "little", "start": 0.129, "end": 0.355 },
+        { "text": "rabbit", "start": 0.355, "end": 0.646 },
+        { "text": "woke", "start": 0.743, "end": 0.937 },
+        { "text": "up", "start": 0.937, "end": 1.082 },
+        { "text": "in", "start": 1.082, "end": 1.163 },
+        { "text": "the", "start": 1.163, "end": 1.244 },
+        { "text": "green", "start": 1.244, "end": 1.502 },
+        { "text": "forest.", "start": 1.551, "end": 2.116 }
             ]
           },
           {
             "text": "He saw the sun shining through the tall trees.",
-            "words": [ { "text": "He", "start": 4.3, "end": 4.6 },
-  { "text": "saw", "start": 4.6, "end": 4.9 },
-  { "text": "the", "start": 4.9, "end": 5.1 },
-  { "text": "sun", "start": 5.1, "end": 5.4 },
-  { "text": "shining", "start": 5.4, "end": 5.9 },
-  { "text": "through", "start": 5.9, "end": 6.2 },
-  { "text": "the", "start": 6.2, "end": 6.4 },
-  { "text": "tall", "start": 6.4, "end": 6.8 },
-  { "text": "trees.", "start": 6.8, "end": 7.2 }
+            "words": [ 
+              { "text": "He", "start": 2.698, "end": 2.795 },
+        { "text": "saw", "start": 2.795, "end": 3.053 },
+        { "text": "the", "start": 3.086, "end": 3.167 },
+        { "text": "sun", "start": 3.167, "end": 3.474 },
+        { "text": "shining", "start": 3.571, "end": 3.958 },
+        { "text": "through", "start": 3.991, "end": 4.152 },
+        { "text": "the", "start": 4.152, "end": 4.233 },
+        { "text": "tall", "start": 4.233, "end": 4.54 },
+        { "text": "trees.", "start": 4.54, "end": 4.928 }
 ]
           },
           {
             "text": "A gentle wind moved the soft leaves.",
-            "words": [{ "text": "A", "start": 7.3, "end": 7.5 },
-  { "text": "gentle", "start": 7.5, "end": 7.9 },
-  { "text": "wind", "start": 7.9, "end": 8.3 },
-  { "text": "moved", "start": 8.3, "end": 8.7 },
-  { "text": "the", "start": 8.7, "end": 8.9 },
-  { "text": "soft", "start": 8.9, "end": 9.3 },
-  { "text": "leaves.", "start": 9.3, "end": 9.8 }
+            "words": [
+              { "text": "A", "start": 5.526, "end": 5.59 },
+        { "text": "gentle", "start": 5.59, "end": 5.93 },
+        { "text": "wind", "start": 5.93, "end": 6.398 },
+        { "text": "moved", "start": 6.398, "end": 6.641 },
+        { "text": "the", "start": 6.641, "end": 6.738 },
+        { "text": "soft", "start": 6.738, "end": 7.142 },
+        { "text": "leaves.", "start": 7.142, "end": 7.432 }
 ]
           }
         ]
