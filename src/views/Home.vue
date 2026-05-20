@@ -118,6 +118,8 @@
       </h2>
     </div>
 
+    
+
     <!-- HOME CONTENT -->
     <section class="py-24 px-6">
       <div class="text-center mb-16">
@@ -138,6 +140,7 @@
             class="flex gap-8 transition-transform duration-500"
             :style="{ transform: `translateX(-${featuredIndex * 340}px)` }"
           >
+
             <StoryCard v-for="story in featuredStories" :key="story.id" :story="story" />
           </div>
         </div>
@@ -218,50 +221,7 @@ const prevFeatured = () => {
   }
 }
 
-const categories = [
-  {
-    id: 1,
-    name: "Fairy Tales",
-    icon: "🧚",
-    description: "Magical fairy adventures and dreams.",
-    bg: "bg-gradient-to-br from-pink-300 to-purple-400",
-  },
-  {
-    id: 2,
-    name: "Animal Stories",
-    icon: "🐻",
-    description: "Cute animal friends and jungle fun.",
-    bg: "bg-gradient-to-br from-orange-300 to-yellow-300",
-  },
-  {
-    id: 3,
-    name: "Space Adventures",
-    icon: "🚀",
-    description: "Fly through stars and galaxies.",
-    bg: "bg-gradient-to-br from-blue-400 to-indigo-500",
-  },
-  {
-    id: 4,
-    name: "Bedtime Stories",
-    icon: "🌙",
-    description: "Soft relaxing bedtime adventures.",
-    bg: "bg-gradient-to-br from-indigo-400 to-purple-600",
-  },
-  {
-    id: 5,
-    name: "Princess World",
-    icon: "👑",
-    description: "Royal castles and princess dreams.",
-    bg: "bg-gradient-to-br from-pink-400 to-yellow-300",
-  },
-  {
-    id: 6,
-    name: "Dino Land",
-    icon: "🦖",
-    description: "Funny dinosaurs and wild adventures.",
-    bg: "bg-gradient-to-br from-green-300 to-lime-400",
-  },
-]
+
 
 
 </script>
