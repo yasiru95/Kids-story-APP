@@ -5,21 +5,21 @@ import story3 from "../assets/audio/story3.mp3"
 export const heroSlides = [
   {
     id: 1,
-    title: "📚 Kids Story Land",
+    title: "📚 Kids Story Land..",
     description: "Magical adventures and fairy tales for kids 🌈",
-    image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9",
+    image: "https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272836/8_i7nldx.webp",
   },
   {
     id: 2,
     title: "🦁 Brave Lion",
     description: "Join Leo in jungle adventures 🦁",
-    image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d",
+    image: "https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272834/4_grvsqm.webp",
   },
   {
     id: 3,
     title: "🚀 Space Adventure",
     description: "Travel across stars and galaxies 🚀",
-    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa",
+    image: "https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272833/3_wvercf.webp",
   },
 ]
 

@@ -8,6 +8,96 @@
       @change="heroIndex = $event"
     />
 
+    <div
+  class=" bg-gradient-to-b from-pink-100 via-sky-100 to-yellow-100 overflow-hidden py-20 px-6"
+>
+  <!-- TITLE -->
+  <div class="text-center mb-16">
+    <h2
+      class="text-5xl md:text-7xl font-black text-purple-700 drop-shadow-lg"
+    >
+      ⭐ Catgories
+    </h2>
+
+
+  </div>
+
+  <!-- SLIDER -->
+  <div class="relative max-w-7xl mx-auto">
+
+    <!-- LEFT BUTTON -->
+    <button
+      @click="prevFeatured"
+      class="absolute left-0 md:-left-10 top-1/2 -translate-y-1/2 z-30
+      w-20 h-20 rounded-full
+      bg-gradient-to-br from-purple-500 to-pink-400
+      text-white text-4xl shadow-2xl
+      hover:scale-110 hover:-rotate-12 transition duration-300"
+    >
+      ❮
+    </button>
+
+    <!-- STORY BUTTONS -->
+    
+<div class="flex justify-center items-center gap-12 ">
+
+  <div
+    v-for="story in featuredStories.slice(0, 3)"
+    :key="story.id"
+    class="group relative shrink-0"
+  >
+    <!-- OUTER GLOW -->
+<div
+  class="absolute inset-2 rounded-full 
+  bg-pink-300/25 
+  blur-sm 
+  scale-100 
+  group-hover:scale-105 
+  transition duration-500"
+></div>
+
+    <!-- BIG CUTE BUTTON -->
+    <div
+      class="relative w-72 h-72 md:w-80 md:h-80 rounded-full p-4
+      bg-gradient-to-br from-pink-300 via-yellow-200 to-blue-300
+      hover:scale-110 hover:rotate-3
+      shadow-[0_10px_10px_rgba(255,105,180,0.45)]
+      transition duration-500 cursor-pointer"
+    >
+      <!-- IMAGE -->
+      <img
+        src="https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272834/6_bli0uv.webp"
+        alt="story"
+        class="w-full h-full rounded-full object-cover border-[8px] border-white shadow-lg"
+      />
+
+      <!-- FLOATING SPARKLES -->
+      <div class="absolute -top-4 left-6 text-4xl animate-bounce">✨</div>
+
+      <!-- INNER GLOW RING -->
+      <div class="absolute inset-6 rounded-full border-4 border-white/40"></div>
+    </div>
+  </div>
+
+</div>
+    <!-- RIGHT BUTTON -->
+    <button
+      @click="nextFeatured"
+      class="absolute right-0 md:-right-10 top-1/2 -translate-y-1/2 z-30
+      w-20 h-20 rounded-full
+      bg-gradient-to-br from-pink-500 to-yellow-400
+      text-white text-4xl shadow-2xl
+      hover:scale-110 hover:rotate-12 transition duration-300"
+    >
+      ❯
+    </button>
+
+  </div>
+</div>
+
+     
+ 
+
 
       <div
     class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100"
@@ -127,4 +217,60 @@ const prevFeatured = () => {
     featuredIndex.value--
   }
 }
+
+const categories = [
+  {
+    id: 1,
+    name: "Fairy Tales",
+    icon: "🧚",
+    description: "Magical fairy adventures and dreams.",
+    bg: "bg-gradient-to-br from-pink-300 to-purple-400",
+  },
+  {
+    id: 2,
+    name: "Animal Stories",
+    icon: "🐻",
+    description: "Cute animal friends and jungle fun.",
+    bg: "bg-gradient-to-br from-orange-300 to-yellow-300",
+  },
+  {
+    id: 3,
+    name: "Space Adventures",
+    icon: "🚀",
+    description: "Fly through stars and galaxies.",
+    bg: "bg-gradient-to-br from-blue-400 to-indigo-500",
+  },
+  {
+    id: 4,
+    name: "Bedtime Stories",
+    icon: "🌙",
+    description: "Soft relaxing bedtime adventures.",
+    bg: "bg-gradient-to-br from-indigo-400 to-purple-600",
+  },
+  {
+    id: 5,
+    name: "Princess World",
+    icon: "👑",
+    description: "Royal castles and princess dreams.",
+    bg: "bg-gradient-to-br from-pink-400 to-yellow-300",
+  },
+  {
+    id: 6,
+    name: "Dino Land",
+    icon: "🦖",
+    description: "Funny dinosaurs and wild adventures.",
+    bg: "bg-gradient-to-br from-green-300 to-lime-400",
+  },
+]
+
+
 </script>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Fredoka', sans-serif;
+}
+</style>

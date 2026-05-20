@@ -69,9 +69,14 @@
          bg-black"
 >
   <!-- IMAGE -->
-  <img
-    :src="story.image"
->
+
+  <transition name="slide" mode="out-in">
+
+  <div>
+    <img :src="story.pages[currentPage].img">>
+  </div>
+
+  </transition>
     //class="w-full h-[420px] md:h-[520px] object-cover scale-105"
 
   
@@ -412,5 +417,33 @@ watch(
 .fade-leave-to {
   opacity: 0;
   transform: translateX(-40px);
+}
+
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s ease;
+  position: absolute;
+  width: 100%;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.slide-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
 }
 </style>
