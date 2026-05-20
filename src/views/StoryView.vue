@@ -297,6 +297,8 @@ const currentSentenceData = computed(() => {
   return story.value.pages[currentPage.value].sentences[currentSentence.value]
 })
 
+console.log("Current sentence data:", currentSentenceData) // log the current sentence data
+
 /* ================= AUDIO ================= */
 const playStoryFromPage = () => {
   playAudio(story.value.pages[currentPage.value].audio)
