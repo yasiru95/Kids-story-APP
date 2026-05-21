@@ -7,7 +7,7 @@
     "pages": [
       {
         "img": "https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272833/3_wvercf.webp",
-        "audio": "/src/assets/audio/story1.mp3",
+        "audio": "../assets/audio/story1.mp3",
         "sentences": [
           {
             "text": "The little rabbit woke up in the green forest.",
@@ -54,7 +54,7 @@
       {
         
     "img": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa",
-        "audio": "/src/assets/audio/story2.mp3",
+        "audio": "../assets/audio/story2.mp3",
         "sentences": [
           {
             "text": "The rabbit met a small brown squirrel on a branch.",
@@ -98,7 +98,7 @@
       },
       {
     "img": "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13",
-"audio": "/src/assets/audio/story3.mp3",
+"audio": "../assets/audio/story3.mp3",
         "sentences": [
           {
             "text": "A big rain started falling in the evening sky.",

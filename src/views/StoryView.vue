@@ -212,9 +212,9 @@
 import { computed, ref, watch, onMounted } from "vue"
 import { useRoute } from "vue-router"
 
-import story1 from "../assets/audio/story1.mp3"
-import story2 from "../assets/audio/story2.mp3"
-import story3 from "../assets/audio/story3.mp3"
+// import story1 from "../assets/audio/story1.mp3"
+// import story2 from "../assets/audio/story2.mp3"
+// import story3 from "../assets/audio/story3.mp3"
 
 
 const heroRef = ref(null)

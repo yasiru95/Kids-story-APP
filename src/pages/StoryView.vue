@@ -68,32 +68,7 @@ import { ref, computed, watch, onMounted } from "vue"
 
 /* ================= STORIES ================= */
 
-const stories = [
-  {
-    audio: require("../assets/audio/story1.mp3"),
-    text: [
-      "The little rabbit woke up in the green forest.",
-      "He saw the sun shining through the tall trees.",
-      "A gentle wind moved the soft leaves."
-    ]
-  },
-  {
-    audio: require("../assets/audio/story2.mp3"),
-    text: [
-      "The rabbit met a small brown squirrel on a branch.",
-      "They shared some sweet berries together.",
-      "They became happy friends in the forest."
-    ]
-  },
-  {
-    audio: require("../assets/audio/story3.mp3"),
-    text: [
-      "A big rain started falling in the evening sky.",
-      "The rabbit and squirrel ran into a cozy tree hole.",
-      "They stayed safe and listened to the rain together."
-    ]
-  }
-]
+
 
 /* ================= STATE ================= */
 
