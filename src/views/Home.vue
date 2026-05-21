@@ -124,7 +124,7 @@
     <section class="py-24 px-6">
       <div class="text-center mb-16">
         <h2 class="text-5xl md:text-6xl font-extrabold text-purple-700">⭐ Featured Stories</h2>
-        <p class="mt-4 text-xl text-gray-700">Magical adventures for kids 🌈✨</p>
+        <p class="mt-4 text-xl text-gray-700">Magical adventures for kids...🌈✨</p>
       </div>
 
       <div class="relative max-w-7xl mx-auto">
