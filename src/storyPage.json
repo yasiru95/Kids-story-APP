@@ -59,71 +59,39 @@
           {
             "text": "The rabbit met a small brown squirrel on a branch.",
             "words": [
-              {
-                "text": "The",
-                "start": 0,
-                "end": 0.4
-              },
-              {
-                "text": "rabbit",
-                "start": 0.4,
-                "end": 0.9
-              },
-              {
-                "text": "met",
-                "start": 0.9,
-                "end": 1.2
-              },
-              {
-                "text": "a",
-                "start": 1.2,
-                "end": 1.4
-              },
-              {
-                "text": "squirrel",
-                "start": 1.4,
-                "end": 2
-              }
+               { "text": "The", "start": 0.032, "end": 0.177 },
+    { "text": "rabbit", "start": 0.177, "end": 0.469 },
+    { "text": "met", "start": 0.517, "end": 0.695 },
+    { "text": "a", "start": 0.695, "end": 0.744 },
+    { "text": "small", "start": 0.744, "end": 1.035 },
+    { "text": "brown", "start": 1.148, "end": 1.375 },
+    { "text": "squirrel", "start": 1.407, "end": 1.763 },
+    { "text": "on", "start": 1.893, "end": 2.006 },
+    { "text": "a", "start": 2.038, "end": 2.119 },
+    { "text": "branch.", "start": 2.119, "end": 2.508 }
             ]
           },
           {
             "text": "They shared some sweet berries together.",
             "words": [
-              {
-                "text": "They",
-                "start": 2,
-                "end": 2.4
-              },
-              {
-                "text": "shared",
-                "start": 2.4,
-                "end": 2.8
-              },
-              {
-                "text": "berries",
-                "start": 2.8,
-                "end": 3.2
-              }
+               { "text": "They", "start": 3.106, "end": 3.187 },
+    { "text": "shared", "start": 3.187, "end": 3.592 },
+    { "text": "some", "start": 3.592, "end": 3.770 },
+    { "text": "sweet", "start": 3.770, "end": 4.093 },
+    { "text": "berries", "start": 4.158, "end": 4.449 },
+    { "text": "together.", "start": 4.482, "end": 4.870 }
             ]
           },
           {
             "text": "They became happy friends in the forest.",
             "words": [
-              {
-                "text": "They",
-                "start": 3.2,
-                "end": 3.5
-              },
-              {
-                "text": "became",
-                "start": 3.5,
-                "end": 3.9
-              },
-              {
-                "text": "friends.",
-                "start": 3.9,
-                "end": 4.4
-              }
+              { "text": "They", "start": 5.679, "end": 5.744 },
+    { "text": "became", "start": 5.776, "end": 6.051 },
+    { "text": "happy", "start": 6.100, "end": 6.440 },
+    { "text": "friends", "start": 6.488, "end": 6.925 },
+    { "text": "in", "start": 6.925, "end": 7.055 },
+    { "text": "the", "start": 7.055, "end": 7.136 },
+    { "text": "forest.", "start": 7.136, "end": 7.653 }
             ]
           }
         ]
@@ -135,76 +103,43 @@
           {
             "text": "A big rain started falling in the evening sky.",
             "words": [
-              {
-                "text": "A",
-                "start": 0,
-                "end": 0.3
-              },
-              {
-                "text": "big",
-                "start": 0.3,
-                "end": 0.7
-              },
-              {
-                "text": "rain",
-                "start": 0.7,
-                "end": 1.1
-              },
-              {
-                "text": "started",
-                "start": 1.1,
-                "end": 1.7
-              },
-              {
-                "text": "falling.",
-                "start": 1.7,
-                "end": 2.4
-              }
+               { "text": "A", "start": 0.097, "end": 0.145 },
+    { "text": "big", "start": 0.194, "end": 0.372 },
+    { "text": "rain", "start": 0.437, "end": 0.647 },
+    { "text": "started", "start": 0.777, "end": 1.230 },
+    { "text": "falling", "start": 1.230, "end": 1.603 },
+    { "text": "in", "start": 1.651, "end": 1.716 },
+    { "text": "the", "start": 1.732, "end": 1.894 },
+    { "text": "evening", "start": 1.959, "end": 2.186 },
+    { "text": "sky.", "start": 2.234, "end": 2.574 }
             ]
           },
           {
             "text": "The rabbit and squirrel ran into a cozy tree hole.",
             "words": [
-              {
-                "text": "The",
-                "start": 2.4,
-                "end": 2.7
-              },
-              {
-                "text": "rabbit",
-                "start": 2.7,
-                "end": 3.1
-              },
-              {
-                "text": "ran",
-                "start": 3.1,
-                "end": 3.5
-              },
-              {
-                "text": "hole.",
-                "start": 3.5,
-                "end": 4
-              }
+               { "text": "The", "start": 3.190, "end": 3.336 },
+    { "text": "rabbit", "start": 3.336, "end": 3.676 },
+    { "text": "and", "start": 3.676, "end": 3.757 },
+    { "text": "squirrel", "start": 3.757, "end": 4.113 },
+    { "text": "ran", "start": 4.307, "end": 4.437 },
+    { "text": "into", "start": 4.502, "end": 4.761 },
+    { "text": "a", "start": 4.793, "end": 4.874 },
+    { "text": "cozy", "start": 4.874, "end": 5.263 },
+    { "text": "treehole.", "start": 5.295, "end": 5.749 }
             ]
           },
           {
             "text": "They stayed safe and listened to the rain together.",
             "words": [
-              {
-                "text": "They",
-                "start": 4,
-                "end": 4.3
-              },
-              {
-                "text": "stayed",
-                "start": 4.3,
-                "end": 4.7
-              },
-              {
-                "text": "safe.",
-                "start": 4.7,
-                "end": 5.2
-              }
+               { "text": "They", "start": 6.413, "end": 6.510 },
+    { "text": "stayed", "start": 6.510, "end": 6.898 },
+    { "text": "safe", "start": 6.898, "end": 7.287 },
+    { "text": "and", "start": 7.481, "end": 7.546 },
+    { "text": "listened", "start": 7.627, "end": 7.870 },
+    { "text": "to", "start": 7.886, "end": 8.032 },
+    { "text": "the", "start": 8.032, "end": 8.113 },
+    { "text": "rain", "start": 8.113, "end": 8.275 },
+    { "text": "together.", "start": 8.372, "end": 8.826 }
             ]
           }
         ]
