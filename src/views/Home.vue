@@ -2,13 +2,16 @@
   <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 overflow-hidden">
 
     <!-- HERO -->
-    <HeroSlider
-      :slides="heroSlides"
-      :activeIndex="heroIndex"
-      @prev="prevHero"
-      @next="nextHero"
-      @change="heroIndex = $event"
-    />
+    <div class="w-full h-[10vh] sm:h-[65vh] md:h-[750px]">
+      <HeroSlider
+        :slides="heroSlides"
+        :activeIndex="heroIndex"
+        @prev="prevHero"
+        @next="nextHero"
+        @change="heroIndex = $event"
+        class="w-full h-full"
+      />
+    </div>
 
     <!-- CATEGORIES SECTION -->
     <div class="bg-gradient-to-b from-pink-100 via-sky-100 to-yellow-100 overflow-hidden py-10 px-4 sm:px-6 md:px-10 lg:px-16">
@@ -25,10 +28,10 @@
         <button
           @click="prevFeatured"
           class="absolute left-1 sm:left-0 md:-left-10 top-1/2 -translate-y-1/2 z-30
-          w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20
+          w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20
           rounded-full
           bg-gradient-to-br from-purple-500 to-pink-400
-          text-white text-2xl sm:text-3xl md:text-4xl
+          text-white text-xl sm:text-2xl md:text-4xl
           shadow-2xl
           hover:scale-110 transition duration-300"
         >
@@ -36,14 +39,13 @@
         </button>
 
         <!-- CATEGORY BUBBLES -->
-        <div class="flex justify-center items-center gap-4 sm:gap-8 md:gap-12 flex-wrap">
+        <div class="flex sm:justify-center items-center gap-4 sm:gap-8 md:gap-12 flex-nowrap sm:flex-wrap overflow-x-auto sm:overflow-visible px-2 sm:px-0 scrollbar-hide">
 
           <div
             v-for="story in featuredStories.slice(0, 3)"
             :key="story.id"
             class="group relative shrink-0"
           >
-
             <!-- GLOW -->
             <div
               class="absolute inset-2 rounded-full bg-pink-300/25 blur-sm scale-100 group-hover:scale-105 transition duration-500"
@@ -51,8 +53,8 @@
 
             <!-- BUBBLE -->
             <div
-              class="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80
-              rounded-full p-4
+              class="relative w-28 h-28 sm:w-52 sm:h-52 md:w-72 md:h-72 lg:w-80 lg:h-80
+              rounded-full p-3 sm:p-4
               bg-gradient-to-br from-pink-300 via-yellow-200 to-blue-300
               hover:scale-110 hover:rotate-3
               shadow-[0_10px_10px_rgba(255,105,180,0.45)]
@@ -61,16 +63,15 @@
               <img
                 src="https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272834/6_bli0uv.webp"
                 alt="story"
-                class="w-full h-full rounded-full object-cover border-[6px] sm:border-[8px] border-white shadow-lg"
+                class="w-full h-full rounded-full object-cover border-[4px] sm:border-[8px] border-white shadow-lg"
               />
 
-              <div class="absolute -top-2 sm:-top-4 left-4 sm:left-6 text-2xl sm:text-4xl animate-bounce">
+              <div class="absolute -top-1 sm:-top-4 left-2 sm:left-6 text-lg sm:text-4xl animate-bounce">
                 ✨
               </div>
 
-              <div class="absolute inset-6 rounded-full border-4 border-white/40"></div>
+              <div class="absolute inset-4 rounded-full border-2 sm:border-4 border-white/40"></div>
             </div>
-
           </div>
 
         </div>
@@ -79,10 +80,10 @@
         <button
           @click="nextFeatured"
           class="absolute right-1 sm:right-0 md:-right-10 top-1/2 -translate-y-1/2 z-30
-          w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20
+          w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20
           rounded-full
           bg-gradient-to-br from-pink-500 to-yellow-400
-          text-white text-2xl sm:text-3xl md:text-4xl
+          text-white text-xl sm:text-2xl md:text-4xl
           shadow-2xl
           hover:scale-110 transition duration-300"
         >
@@ -95,11 +96,11 @@
     <!-- PRELOADER -->
     <div
       v-if="loading"
-      class="fixed inset-0 flex flex-col items-center justify-center bg-white z-50"
+      class="fixed inset-0 flex flex-col items-center justify-center bg-white z-50 px-4"
     >
-      <div class="w-20 h-20 sm:w-24 sm:h-24 border-[10px] border-pink-300 border-t-purple-600 rounded-full animate-spin"></div>
+      <div class="w-16 h-16 sm:w-24 sm:h-24 border-[8px] sm:border-[10px] border-pink-300 border-t-purple-600 rounded-full animate-spin"></div>
 
-      <h2 class="mt-6 sm:mt-8 text-2xl sm:text-4xl font-extrabold text-purple-700 animate-pulse text-center px-4">
+      <h2 class="mt-6 sm:mt-8 text-xl sm:text-4xl font-extrabold text-purple-700 animate-pulse text-center">
         📚 Loading Stories...
       </h2>
     </div>
@@ -108,10 +109,10 @@
     <section class="py-16 sm:py-24 px-4 sm:px-6 md:px-10 lg:px-16">
 
       <div class="text-center mb-10 sm:mb-16">
-        <h2 class="text-3xl sm:text-4xl md:text-6xl font-extrabold text-purple-700">
+        <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold text-purple-700">
           ⭐ Featured Stories
         </h2>
-        <p class="mt-3 sm:mt-4 text-base sm:text-xl text-gray-700">
+        <p class="mt-3 sm:mt-4 text-sm sm:text-xl text-gray-700">
           Magical adventures for kids...🌈✨
         </p>
       </div>
@@ -122,8 +123,8 @@
         <button
           @click="prevFeatured"
           class="absolute left-0 md:-left-8 top-1/2 -translate-y-1/2 z-30
-          w-12 h-12 sm:w-16 sm:h-16 rounded-full
-          bg-gradient-to-r from-purple-500 to-pink-500 text-white text-2xl sm:text-3xl
+          w-10 h-10 sm:w-14 sm:h-14 rounded-full
+          bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xl sm:text-3xl
           shadow-2xl hover:scale-110 transition"
         >
           ❮
@@ -132,7 +133,7 @@
         <!-- SLIDER -->
         <div class="overflow-hidden">
           <div
-            class="flex gap-4 sm:gap-6 md:gap-8 transition-transform duration-500"
+            class="flex gap-3 sm:gap-6 md:gap-8 transition-transform duration-500"
             :style="{ transform: `translateX(-${featuredIndex * getCardWidth()}px)` }"
           >
             <StoryCard
@@ -147,8 +148,8 @@
         <button
           @click="nextFeatured"
           class="absolute right-0 md:-right-8 top-1/2 -translate-y-1/2 z-30
-          w-12 h-12 sm:w-16 sm:h-16 rounded-full
-          bg-gradient-to-r from-pink-500 to-yellow-400 text-white text-2xl sm:text-3xl
+          w-10 h-10 sm:w-14 sm:h-14 rounded-full
+          bg-gradient-to-r from-pink-500 to-yellow-400 text-white text-xl sm:text-3xl
           shadow-2xl hover:scale-110 transition"
         >
           ❯
@@ -173,8 +174,8 @@ const featuredStories = ref([])
 const loading = ref(true)
 
 let heroAutoSlide = null
+let resizeHandler = null
 
-/* ---------------- HERO SLIDER ---------------- */
 const nextHero = () => {
   heroIndex.value = (heroIndex.value + 1) % heroSlides.length
 }
@@ -183,7 +184,6 @@ const prevHero = () => {
   heroIndex.value = (heroIndex.value - 1 + heroSlides.length) % heroSlides.length
 }
 
-/* ---------------- FEATURED ---------------- */
 const nextFeatured = () => {
   if (featuredIndex.value < featuredStories.value.length - 3) {
     featuredIndex.value++
@@ -198,17 +198,18 @@ const prevFeatured = () => {
   }
 }
 
-/* ---------------- RESPONSIVE CARD WIDTH ---------------- */
-const getCardWidth = () => {
-  if (window.innerWidth < 640) return 260
-  if (window.innerWidth < 1024) return 300
-  return 340
+const cardWidth = ref(300)
+
+const updateCardWidth = () => {
+  if (window.innerWidth < 640) cardWidth.value = 260
+  else if (window.innerWidth < 1024) cardWidth.value = 300
+  else cardWidth.value = 340
 }
 
-/* ---------------- LOAD DATA ---------------- */
+const getCardWidth = () => cardWidth.value
+
 const loadStories = async () => {
   loading.value = true
-
   await new Promise((r) => setTimeout(r, 2000))
 
   const response = await fetch("/stories.json")
@@ -218,17 +219,19 @@ const loadStories = async () => {
   loading.value = false
 }
 
-/* ---------------- HERO AUTOPLAY ---------------- */
 onMounted(() => {
   loadStories()
+  updateCardWidth()
 
-  heroAutoSlide = setInterval(() => {
-    nextHero()
-  }, 4000)
+  heroAutoSlide = setInterval(nextHero, 4000)
+
+  resizeHandler = () => updateCardWidth()
+  window.addEventListener("resize", resizeHandler)
 })
 
 onUnmounted(() => {
   clearInterval(heroAutoSlide)
+  window.removeEventListener("resize", resizeHandler)
 })
 </script>
 
@@ -242,5 +245,14 @@ body {
 html {
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
+}
+
+/* hide scrollbar for category scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>
