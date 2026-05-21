@@ -178,7 +178,7 @@ const loadStories = async () => {
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
     // fake API call
-    const response = await fetch("../src/stories.json")
+    const response = await fetch("../stories.json")
     console.log('Response:', response) // log the raw response
 
     // convert json
