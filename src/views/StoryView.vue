@@ -69,7 +69,9 @@
 >
   <!-- IMAGE -->
 
-  <transition name="slide" mode="out-in">
+  <transition 
+  name="slide" mode="out-in"
+  >
     <div>
       <img :src="story.pages[currentPage].img" class="w-full h-full object-cover scale-105" />
     </div>

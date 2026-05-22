@@ -14,150 +14,8 @@
     </div>
 
     <!-- CATEGORIES -->
-    <section class="overflow-hidden bg-gradient-to-b from-pink-100 via-sky-100 to-yellow-100 px-4 py-10 sm:px-6 md:px-10 lg:px-16">
-
-      <!-- TITLE -->
-      <div class="mb-12 text-center md:mb-16">
-        <CuteHeading text="⭐ Categories" />
-      </div>
-
-      <!-- CATEGORY SLIDER -->
-      <div class="relative mx-auto max-w-7xl">
-
-        <!-- LEFT -->
-        <button
-          @click="prevFeatured"
-          class="
-            absolute left-2 top-1/2 z-30
-            flex items-center justify-center
-            h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16
-            -translate-y-1/2
-            rounded-full
-            bg-gradient-to-br from-purple-500 to-pink-400
-            text-xl text-white sm:text-2xl md:text-4xl
-            shadow-2xl
-            transition duration-300
-            hover:scale-110
-            md:-left-10
-          "
-        >
-          ❮
-        </button>
-
-        <!-- BUBBLES -->
-        <div
-          class="
-            flex items-center gap-4
-            overflow-x-auto px-2
-            sm:flex-wrap sm:justify-center sm:gap-8 sm:overflow-visible sm:px-0
-            md:gap-12
-            scrollbar-none
-          "
-        >
-
-          <div
-            v-for="story in featuredStories.slice(0, 3)"
-            :key="story.id"
-            class="group relative shrink-0"
-          >
-
-            <!-- GLOW -->
-            <div
-              class="
-                absolute inset-2
-                rounded-full
-                bg-pink-300/25
-                blur-sm
-                transition duration-500
-                group-hover:scale-105
-              "
-            ></div>
-
-            <!-- BUBBLE -->
-            <div
-              class="
-                relative
-                h-28 w-28
-                cursor-pointer
-                rounded-full
-                bg-gradient-to-br from-pink-300 via-yellow-200 to-blue-300
-                p-2
-                shadow-[0_10px_10px_rgba(255,105,180,0.45)]
-                transition duration-500
-                hover:scale-110 hover:rotate-3
-
-                sm:h-40 sm:w-40 sm:p-3
-                md:h-56 md:w-56
-                lg:h-64 lg:w-64
-              "
-            >
-
-              <img
-                src="https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272834/6_bli0uv.webp"
-                alt="story"
-                class="
-                  h-full w-full
-                  rounded-full
-                  border-[4px] border-white
-                  object-cover
-                  shadow-lg
-
-                  sm:border-[8px]
-                "
-              />
-
-              <!-- STAR -->
-              <div
-                class="
-                  absolute left-2 -top-1
-                  animate-bounce
-                  text-lg
-
-                  sm:left-6 sm:-top-4 sm:text-4xl
-                "
-              >
-                ✨
-              </div>
-
-              <!-- INNER RING -->
-              <div
-                class="
-                  absolute inset-4
-                  rounded-full
-                  border-2 border-white/40
-
-                  sm:border-4
-                "
-              ></div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- RIGHT -->
-        <button
-          @click="nextFeatured"
-          class="
-            absolute right-2 top-1/2 z-30
-            flex items-center justify-center
-            h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16
-            -translate-y-1/2
-            rounded-full
-            bg-gradient-to-br from-pink-500 to-yellow-400
-            text-xl text-white sm:text-2xl md:text-4xl
-            shadow-2xl
-            transition duration-300
-            hover:scale-110
-            md:-right-10
-          "
-        >
-          ❯
-        </button>
-
-      </div>
-    </section>
+    <catergory :featuredStories="featuredStories" />
+    
 
     <!-- books -->
 <!-- BOOKS SECTION -->
@@ -298,17 +156,10 @@
     </div>
 
     <!-- FEATURED STORIES -->
-    <section class="px-4 py-16 sm:px-6 sm:py-24 md:px-10 lg:px-16">
+    
 
-     <!-- TITLE -->
-      <div class="mb-12 text-center md:mb-16">
-        <CuteHeading text="⭐ CategoriesAAAA" />
-      </div>      
-
-      <!-- SLIDER -->
-
-
-    </section>
+      <FooterPart />
+  
 
   </div>
 </template>
@@ -317,8 +168,10 @@
 import { ref, onMounted, onUnmounted } from "vue"
 import HeroSlider from "../components/HeroSlider.vue"
 import StoryCard from "../components/StoryCard.vue"
-import CuteHeading from "../components/CuteHeading.vue"
+// import CuteHeading from "../components/CuteHeading.vue"
 import { heroSlides } from "../data/storyData.js"
+import FooterPart from "../components/FooterPart.vue"
+import catergory from "../components/Catergory.vue"
 
 const heroIndex = ref(0)
 const featuredStories = ref([])
@@ -403,6 +256,9 @@ onUnmounted(() => {
 
   window.removeEventListener("resize", resizeHandler)
 })
+
+
+
 </script>
 
 <style scoped>
