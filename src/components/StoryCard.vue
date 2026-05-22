@@ -13,49 +13,54 @@
     </div>
   </div> -->
 
-  <div class="flex justify-center flex-wrap gap-10 px-6 py-10">
-
   <div
-   
-    class="group relative w-64 md:w-72 cursor-pointer"
+  class="
+    group
+    relative
+    w-[180px]
+    sm:w-[200px]
+    md:w-[220px]
+    shrink-0
+    snap-center
+  "
+>
+  <router-link
+    :to="`/story/${story.id}`"
+    class="block"
   >
-    <router-link :to="`/story/${story.id}`">
 
-      <!-- BOOK SHADOW -->
-      <div
-        class="absolute inset-0 bg-pink-300/20 rounded-[28px] blur-md scale-105 group-hover:scale-110 transition"
-      ></div>
+    <!-- STORY CARD -->
+    <div
+      class="
+        overflow-hidden
+        rounded-2xl
 
-      <!-- BOOK COVER -->
-      <div
-        class="relative bg-white rounded-[28px] overflow-hidden shadow-md
-        group-hover:-translate-y-2 transition duration-500"
-      >
+        bg-white
 
-        <!-- IMAGE (BOOK COVER) -->
-        <img
-          :src="story.image"
-          alt="story"
-          class="w-full h-80 object-cover"
-        />
-   
-        <!-- BOTTOM GLOW EDGE -->
-        <div
-          class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/30 to-transparent"
-        ></div>
 
-      </div>
+        transition-all
+        duration-300
 
-      <!-- UNDER LABEL (OPTIONAL MINIMAL) -->
-      <!-- <div class="text-center mt-4">
-        <h3 class="text-lg font-bold text-purple-700">
-          {{ story.title }}
-        </h3>
-      </div> -->
+      "
+    >
 
-    </router-link>
-  </div>
+      <!-- IMAGE -->
+      <img
+        :src="story.image"
+        alt="story"
+        class="
+          h-64
+          w-full
+          object-cover
 
+          sm:h-72
+          md:h-80
+        "
+      />
+
+    </div>
+
+  </router-link>
 </div>
 
   

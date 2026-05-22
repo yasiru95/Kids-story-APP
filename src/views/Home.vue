@@ -1,8 +1,8 @@
 ﻿<template>
-  <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 overflow-hidden">
+  <div class="min-h-screen overflow-hidden bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 font-['Fredoka']">
 
     <!-- HERO -->
-    <div class="w-full h-[10vh] sm:h-[65vh] md:h-[750px]">
+    <div class="w-full overflow-hidden">
       <HeroSlider
         :slides="heroSlides"
         :activeIndex="heroIndex"
@@ -13,149 +13,301 @@
       />
     </div>
 
-    <!-- CATEGORIES SECTION -->
-    <div class="bg-gradient-to-b from-pink-100 via-sky-100 to-yellow-100 overflow-hidden py-10 px-4 sm:px-6 md:px-10 lg:px-16">
+    <!-- CATEGORIES -->
+    <section class="overflow-hidden bg-gradient-to-b from-pink-100 via-sky-100 to-yellow-100 px-4 py-10 sm:px-6 md:px-10 lg:px-16">
 
       <!-- TITLE -->
-      <div class="text-center mb-12 md:mb-16">
-        <CuteHeading text="⭐ CategoriesAAAA" />
+      <div class="mb-12 text-center md:mb-16">
+        <CuteHeading text="⭐ Categories" />
       </div>
 
-      <!-- SLIDER WRAPPER -->
-      <div class="relative max-w-7xl mx-auto">
+      <!-- CATEGORY SLIDER -->
+      <div class="relative mx-auto max-w-7xl">
 
-        <!-- LEFT BUTTON -->
+        <!-- LEFT -->
         <button
           @click="prevFeatured"
-          class="absolute left-1 sm:left-0 md:-left-10 top-1/2 -translate-y-1/2 z-30
-          w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20
-          rounded-full
-          bg-gradient-to-br from-purple-500 to-pink-400
-          text-white text-xl sm:text-2xl md:text-4xl
-          shadow-2xl
-          hover:scale-110 transition duration-300"
+          class="
+            absolute left-2 top-1/2 z-30
+            flex items-center justify-center
+            h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16
+            -translate-y-1/2
+            rounded-full
+            bg-gradient-to-br from-purple-500 to-pink-400
+            text-xl text-white sm:text-2xl md:text-4xl
+            shadow-2xl
+            transition duration-300
+            hover:scale-110
+            md:-left-10
+          "
         >
           ❮
         </button>
 
-        <!-- CATEGORY BUBBLES -->
-        <div class="flex sm:justify-center items-center gap-4 sm:gap-8 md:gap-12 flex-nowrap sm:flex-wrap overflow-x-auto sm:overflow-visible px-2 sm:px-0 scrollbar-hide">
+        <!-- BUBBLES -->
+        <div
+          class="
+            flex items-center gap-4
+            overflow-x-auto px-2
+            sm:flex-wrap sm:justify-center sm:gap-8 sm:overflow-visible sm:px-0
+            md:gap-12
+            scrollbar-none
+          "
+        >
 
           <div
             v-for="story in featuredStories.slice(0, 3)"
             :key="story.id"
             class="group relative shrink-0"
           >
+
             <!-- GLOW -->
             <div
-              class="absolute inset-2 rounded-full bg-pink-300/25 blur-sm scale-100 group-hover:scale-105 transition duration-500"
+              class="
+                absolute inset-2
+                rounded-full
+                bg-pink-300/25
+                blur-sm
+                transition duration-500
+                group-hover:scale-105
+              "
             ></div>
 
             <!-- BUBBLE -->
             <div
-              class="relative w-28 h-28 sm:w-52 sm:h-52 md:w-72 md:h-72 lg:w-80 lg:h-80
-              rounded-full p-3 sm:p-4
-              bg-gradient-to-br from-pink-300 via-yellow-200 to-blue-300
-              hover:scale-110 hover:rotate-3
-              shadow-[0_10px_10px_rgba(255,105,180,0.45)]
-              transition duration-500 cursor-pointer"
+              class="
+                relative
+                h-28 w-28
+                cursor-pointer
+                rounded-full
+                bg-gradient-to-br from-pink-300 via-yellow-200 to-blue-300
+                p-2
+                shadow-[0_10px_10px_rgba(255,105,180,0.45)]
+                transition duration-500
+                hover:scale-110 hover:rotate-3
+
+                sm:h-40 sm:w-40 sm:p-3
+                md:h-56 md:w-56
+                lg:h-64 lg:w-64
+              "
             >
+
               <img
                 src="https://res.cloudinary.com/dxe23gtsc/image/upload/v1779272834/6_bli0uv.webp"
                 alt="story"
-                class="w-full h-full rounded-full object-cover border-[4px] sm:border-[8px] border-white shadow-lg"
+                class="
+                  h-full w-full
+                  rounded-full
+                  border-[4px] border-white
+                  object-cover
+                  shadow-lg
+
+                  sm:border-[8px]
+                "
               />
 
-              <div class="absolute -top-1 sm:-top-4 left-2 sm:left-6 text-lg sm:text-4xl animate-bounce">
+              <!-- STAR -->
+              <div
+                class="
+                  absolute left-2 -top-1
+                  animate-bounce
+                  text-lg
+
+                  sm:left-6 sm:-top-4 sm:text-4xl
+                "
+              >
                 ✨
               </div>
 
-              <div class="absolute inset-4 rounded-full border-2 sm:border-4 border-white/40"></div>
+              <!-- INNER RING -->
+              <div
+                class="
+                  absolute inset-4
+                  rounded-full
+                  border-2 border-white/40
+
+                  sm:border-4
+                "
+              ></div>
+
             </div>
+
           </div>
 
-        </div>
-
-        <!-- RIGHT BUTTON -->
-        <button
-          @click="nextFeatured"
-          class="absolute right-1 sm:right-0 md:-right-10 top-1/2 -translate-y-1/2 z-30
-          w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20
-          rounded-full
-          bg-gradient-to-br from-pink-500 to-yellow-400
-          text-white text-xl sm:text-2xl md:text-4xl
-          shadow-2xl
-          hover:scale-110 transition duration-300"
-        >
-          ❯
-        </button>
-
-      </div>
-    </div>
-
-    <!-- PRELOADER -->
-    <div
-      v-if="loading"
-      class="fixed inset-0 flex flex-col items-center justify-center bg-white z-50 px-4"
-    >
-      <div class="w-16 h-16 sm:w-24 sm:h-24 border-[8px] sm:border-[10px] border-pink-300 border-t-purple-600 rounded-full animate-spin"></div>
-
-      <h2 class="mt-6 sm:mt-8 text-xl sm:text-4xl font-extrabold text-purple-700 animate-pulse text-center">
-        📚 Loading Stories...
-      </h2>
-    </div>
-
-    <!-- FEATURED STORIES -->
-    <section class="py-16 sm:py-24 px-4 sm:px-6 md:px-10 lg:px-16">
-
-      <div class="text-center mb-10 sm:mb-16">
-        <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold text-purple-700">
-          ⭐ Featured Stories
-        </h2>
-        <p class="mt-3 sm:mt-4 text-sm sm:text-xl text-gray-700">
-          Magical adventures for kids...🌈✨
-        </p>
-      </div>
-
-      <div class="relative max-w-7xl mx-auto">
-
-        <!-- LEFT -->
-        <button
-          @click="prevFeatured"
-          class="absolute left-0 md:-left-8 top-1/2 -translate-y-1/2 z-30
-          w-10 h-10 sm:w-14 sm:h-14 rounded-full
-          bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xl sm:text-3xl
-          shadow-2xl hover:scale-110 transition"
-        >
-          ❮
-        </button>
-
-        <!-- SLIDER -->
-        <div class="overflow-hidden">
-          <div
-            class="flex gap-3 sm:gap-6 md:gap-8 transition-transform duration-500"
-            :style="{ transform: `translateX(-${featuredIndex * getCardWidth()}px)` }"
-          >
-            <StoryCard
-              v-for="story in featuredStories"
-              :key="story.id"
-              :story="story"
-            />
-          </div>
         </div>
 
         <!-- RIGHT -->
         <button
           @click="nextFeatured"
-          class="absolute right-0 md:-right-8 top-1/2 -translate-y-1/2 z-30
-          w-10 h-10 sm:w-14 sm:h-14 rounded-full
-          bg-gradient-to-r from-pink-500 to-yellow-400 text-white text-xl sm:text-3xl
-          shadow-2xl hover:scale-110 transition"
+          class="
+            absolute right-2 top-1/2 z-30
+            flex items-center justify-center
+            h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16
+            -translate-y-1/2
+            rounded-full
+            bg-gradient-to-br from-pink-500 to-yellow-400
+            text-xl text-white sm:text-2xl md:text-4xl
+            shadow-2xl
+            transition duration-300
+            hover:scale-110
+            md:-right-10
+          "
         >
           ❯
         </button>
 
       </div>
+    </section>
+
+    <!-- books -->
+<!-- BOOKS SECTION -->
+<section class="overflow-hidden bg-gradient-to-b from-pink-100 via-sky-100 to-yellow-100 px-4 py-10 sm:px-6 md:px-10 lg:px-16">
+
+  <!-- TITLE -->
+  <div class="mb-12 text-center md:mb-16">
+    <CuteHeading text="⭐ Books" />
+  </div>
+
+  <!-- SLIDER WRAPPER -->
+         <div class="relative mx-auto max-w-7xl">
+
+        <!-- LEFT -->
+        <button
+          @click="prevFeatured"
+          class="
+            absolute left-2 top-1/2 z-30
+            flex items-center justify-center
+            h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14
+            -translate-y-1/2
+            rounded-full
+            bg-gradient-to-r from-purple-500 to-pink-500
+            text-xl text-white
+            shadow-2xl
+            transition
+            hover:scale-110
+
+            sm:text-2xl
+            md:-left-8
+            md:text-3xl
+          "
+        >
+          ❮
+        </button>
+
+        <!-- STORIES -->
+        <div
+          ref="featuredSlider"
+          class="
+            overflow-x-auto
+            scroll-smooth
+            scrollbar-none
+            snap-x snap-mandatory
+
+            sm:overflow-hidden
+          "
+        >
+
+          <div
+            class="
+              flex
+              gap-3
+              transition-transform duration-500
+
+              sm:gap-4
+              md:gap-4
+            "
+          >
+
+            <StoryCard
+              v-for="story in featuredStories"
+              :key="story.id"
+              :story="story"
+            />
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <button
+          @click="nextFeatured"
+          class="
+            absolute right-2 top-1/2 z-30
+            flex items-center justify-center
+            h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14
+            -translate-y-1/2
+            rounded-full
+            bg-gradient-to-r from-pink-500 to-yellow-400
+            text-xl text-white
+            shadow-2xl
+            transition
+            hover:scale-110
+
+            sm:text-2xl
+            md:-right-8
+            md:text-3xl
+          "
+        >
+          ❯
+        </button>
+
+      </div>
+
+</section>
+
+    <!-- LOADER -->
+    <div
+      v-if="loading"
+      class="
+        fixed inset-0 z-50
+        flex flex-col items-center justify-center
+        bg-white px-4
+      "
+    >
+
+      <div
+        class="
+          h-16 w-16
+          animate-spin
+          rounded-full
+          border-[8px]
+          border-pink-300
+          border-t-purple-600
+
+          sm:h-24 sm:w-24
+          sm:border-[10px]
+        "
+      ></div>
+
+      <h2
+        class="
+          mt-6
+          animate-pulse
+          text-center
+          text-xl
+          font-extrabold
+          text-purple-700
+
+          sm:mt-8
+          sm:text-4xl
+        "
+      >
+        📚 Loading Stories...
+      </h2>
+
+    </div>
+
+    <!-- FEATURED STORIES -->
+    <section class="px-4 py-16 sm:px-6 sm:py-24 md:px-10 lg:px-16">
+
+     <!-- TITLE -->
+      <div class="mb-12 text-center md:mb-16">
+        <CuteHeading text="⭐ CategoriesAAAA" />
+      </div>      
+
+      <!-- SLIDER -->
+
+
     </section>
 
   </div>
@@ -169,9 +321,10 @@ import CuteHeading from "../components/CuteHeading.vue"
 import { heroSlides } from "../data/storyData.js"
 
 const heroIndex = ref(0)
-const featuredIndex = ref(0)
 const featuredStories = ref([])
+const featuredSlider = ref(null)
 const loading = ref(true)
+const cardWidth = ref(300)
 
 let heroAutoSlide = null
 let resizeHandler = null
@@ -181,24 +334,37 @@ const nextHero = () => {
 }
 
 const prevHero = () => {
-  heroIndex.value = (heroIndex.value - 1 + heroSlides.length) % heroSlides.length
+  heroIndex.value =
+    (heroIndex.value - 1 + heroSlides.length) % heroSlides.length
+}
+
+const getCardGap = () => {
+  if (window.innerWidth < 640) return 12
+  if (window.innerWidth < 1024) return 24
+  return 32
 }
 
 const nextFeatured = () => {
-  if (featuredIndex.value < featuredStories.value.length - 3) {
-    featuredIndex.value++
-  } else {
-    featuredIndex.value = 0
-  }
+  if (!featuredSlider.value) return
+
+  const scrollAmount = getCardWidth() + getCardGap()
+
+  featuredSlider.value.scrollBy({
+    left: scrollAmount,
+    behavior: "smooth"
+  })
 }
 
 const prevFeatured = () => {
-  if (featuredIndex.value > 0) {
-    featuredIndex.value--
-  }
-}
+  if (!featuredSlider.value) return
 
-const cardWidth = ref(300)
+  const scrollAmount = getCardWidth() + getCardGap()
+
+  featuredSlider.value.scrollBy({
+    left: -scrollAmount,
+    behavior: "smooth"
+  })
+}
 
 const updateCardWidth = () => {
   if (window.innerWidth < 640) cardWidth.value = 260
@@ -210,6 +376,7 @@ const getCardWidth = () => cardWidth.value
 
 const loadStories = async () => {
   loading.value = true
+
   await new Promise((r) => setTimeout(r, 2000))
 
   const response = await fetch("/stories.json")
@@ -221,38 +388,25 @@ const loadStories = async () => {
 
 onMounted(() => {
   loadStories()
+
   updateCardWidth()
 
   heroAutoSlide = setInterval(nextHero, 4000)
 
   resizeHandler = () => updateCardWidth()
+
   window.addEventListener("resize", resizeHandler)
 })
 
 onUnmounted(() => {
   clearInterval(heroAutoSlide)
+
   window.removeEventListener("resize", resizeHandler)
 })
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+<style scoped>
 
-body {
-  font-family: 'Fredoka', sans-serif;
-}
 
-html {
-  -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth;
-}
 
-/* hide scrollbar for category scroll */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 </style>

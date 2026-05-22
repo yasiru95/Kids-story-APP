@@ -1,7 +1,7 @@
 <template>
   <section
-    class="relative w-full overflow-hidden
-           h-[320px] sm:h-[420px] md:h-[550px] lg:h-[750px]"
+    class="relative w-full overflow-hidden max-h-[90vh]
+           h-[320px] sm:h-[420px] md:h-[550px] lg:h-[700px] xl:h-[760px]"
   >
     <!-- SLIDES WRAPPER -->
     <div

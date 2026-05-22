@@ -32,12 +32,12 @@
 
 
 <!-- PLAY + FULLSCREEN BUTTONS -->
-<div class="flex justify-center gap-4  mb-8">
+<div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 px-2 sm:px-0">
 
   <!-- PLAY -->
   <button
     @click="playStoryFromPage"
-    class="px-10 py-5 rounded-full text-2xl font-bold text-white shadow-2xl
+    class="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 rounded-full text-xl sm:text-2xl font-bold text-white shadow-2xl
     bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400
     hover:scale-110 transition"
   >
@@ -47,7 +47,7 @@
   <!-- FULLSCREEN -->
   <button
     @click="toggleHeroFullScreen"
-    class="px-6 py-5 rounded-full text-2xl font-bold text-purple-700 shadow-2xl
+    class="w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-5 rounded-full text-xl sm:text-2xl font-bold text-purple-700 shadow-2xl
     bg-white hover:scale-110 transition border-2 border-purple-200"
   >
     ⛶ Full Screen
@@ -63,21 +63,17 @@
 <!-- HERO -->
 <div
   ref="heroRef"
-  
-  class="relative overflow-hidden shadow-2xl border-8 border-white
-         w-full h-[420px] md:h-[520px] rounded-[40px]
+  class="relative overflow-hidden shadow-2xl border-6 sm:border-8 border-white
+         w-full h-[320px] sm:h-[420px] md:h-[520px] lg:h-[620px] xl:h-[700px] rounded-[32px] sm:rounded-[40px]
          bg-black"
 >
   <!-- IMAGE -->
 
   <transition name="slide" mode="out-in">
-
-  <div>
-    <img :src="story.pages[currentPage].img">>
-  </div>
-
+    <div>
+      <img :src="story.pages[currentPage].img" class="w-full h-full object-cover scale-105" />
+    </div>
   </transition>
-    //class="w-full h-[420px] md:h-[520px] object-cover scale-105"
 
   
 
@@ -87,9 +83,9 @@
   <!-- 🌈 TOP TITLE (RESPONSIVE) -->
   <div class="absolute top-4 left-1/2 -translate-x-1/2 w-full px-4 flex justify-center">
 
-    <div class="bg-white/90 backdrop-blur-md px-4 md:px-8 py-2 md:py-4 rounded-full shadow-xl border-2 border-pink-200 text-center animate-float">
+    <div class="bg-white/90 backdrop-blur-md px-4 md:px-8 py-2 md:py-4 rounded-full shadow-xl border-2 border-pink-200 text-center animate-float max-w-[95%]">
 
-      <h1 class="text-xl md:text-4xl font-extrabold text-pink-600">
+      <h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-extrabold text-pink-600 truncate">
         {{ story.title }}
       </h1>
 
@@ -120,9 +116,9 @@
   <!-- 💬 CLOUD STORY TEXT (RESPONSIVE) -->
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center px-4">
 
-    <div class="relative bg-white/80 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-[40px] shadow-2xl border-4 border-blue-100 max-w-[90%] md:max-w-fit">
+    <div class="relative bg-white/80 backdrop-blur-md px-4 md:px-6 py-3 rounded-[40px] shadow-2xl border-4 border-blue-100 max-w-[95%] md:max-w-fit">
 
-      <p class="text-center text-sm md:text-2xl font-semibold text-purple-700 font-[cursive] leading-snug">
+      <p class="text-center text-sm sm:text-base md:text-xl font-semibold text-purple-700 font-[cursive] leading-snug">
 
         💬
 
