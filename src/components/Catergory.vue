@@ -15,7 +15,7 @@
       class="absolute left-2 top-1/2 z-30 flex items-center justify-center
       h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16
       -translate-y-1/2 rounded-full
-      bg-gradient-to-br from-purple-500 to-pink-400
+      bg-gradient-to-r from-purple-500 to-pink-500
       text-xl text-white sm:text-2xl md:text-4xl
       shadow-2xl hover:scale-110 transition"
     >
@@ -89,7 +89,7 @@
       class="absolute right-2 top-1/2 z-30 flex items-center justify-center
       h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16
       -translate-y-1/2 rounded-full
-      bg-gradient-to-br from-pink-500 to-yellow-400
+      bg-gradient-to-r from-purple-500 to-pink-500
       text-xl text-white sm:text-2xl md:text-4xl
       shadow-2xl hover:scale-110 transition"
     >

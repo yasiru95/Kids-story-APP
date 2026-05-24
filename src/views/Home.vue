@@ -95,7 +95,7 @@
             h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14
             -translate-y-1/2
             rounded-full
-            bg-gradient-to-r from-pink-500 to-yellow-400
+            bg-gradient-to-r from-purple-500 to-pink-500
             text-xl text-white
             shadow-2xl
             transition
@@ -114,46 +114,7 @@
 </section>
 
     <!-- LOADER -->
-    <div
-      v-if="loading"
-      class="
-        fixed inset-0 z-50
-        flex flex-col items-center justify-center
-        bg-white px-4
-      "
-    >
-
-      <div
-        class="
-          h-16 w-16
-          animate-spin
-          rounded-full
-          border-[8px]
-          border-pink-300
-          border-t-purple-600
-
-          sm:h-24 sm:w-24
-          sm:border-[10px]
-        "
-      ></div>
-
-      <h2
-        class="
-          mt-6
-          animate-pulse
-          text-center
-          text-xl
-          font-extrabold
-          text-purple-700
-
-          sm:mt-8
-          sm:text-4xl
-        "
-      >
-        📚 Loading Stories...
-      </h2>
-
-    </div>
+    <Loadder v-if="loading" />
 
     <!-- FEATURED STORIES -->
     
@@ -172,6 +133,7 @@ import StoryCard from "../components/StoryCard.vue"
 import { heroSlides } from "../data/storyData.js"
 import FooterPart from "../components/FooterPart.vue"
 import catergory from "../components/Catergory.vue"
+import Loadder from "../components/Loadder.vue"
 
 const heroIndex = ref(0)
 const featuredStories = ref([])

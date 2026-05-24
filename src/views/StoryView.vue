@@ -11,20 +11,7 @@
       </router-link>
     </div>
 
-    <div
-      v-if="loading"
-      class="fixed inset-0 flex flex-col items-center justify-center bg-white z-50"
-    >
-      <!-- Spinner -->
-      <div
-        class="w-24 h-24 border-[10px] border-pink-300 border-t-purple-600 rounded-full animate-spin"
-      ></div>
-
-      <!-- Text -->
-      <h2 class="mt-8 text-4xl font-extrabold text-purple-700 animate-pulse">
-        📚 Loading Stories...
-      </h2>
-    </div>
+    <Loadder v-if="loading" />
 
     <!-- STORY -->
     <div v-if="story" class="max-w-6xl mx-auto">
@@ -38,7 +25,7 @@
   <button
     @click="playStoryFromPage"
     class="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 rounded-full text-xl sm:text-2xl font-bold text-white shadow-2xl
-    bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400
+            bg-gradient-to-r from-purple-500 to-pink-500
     hover:scale-110 transition"
   >
     🎧 Play Story
@@ -70,11 +57,15 @@
   <!-- IMAGE -->
 
   <transition 
-  name="slide" mode="out-in"
+   mode="out-in"
+enter-active-class="transition-all duration-500 ease-out"
+  leave-active-class="transition-all duration-500 ease-in"
+  enter-from-class="opacity-0 translate-x-10"
+  enter-to-class="opacity-100 translate-x-0"
+  leave-from-class="opacity-100 translate-x-0"
+  leave-to-class="opacity-0 -translate-x-10"
   >
-    <div>
-      <img :src="story.pages[currentPage].img" class="w-full h-full object-cover scale-105" />
-    </div>
+      <img :key="currentPage" :src="story.pages[currentPage].img" class="w-full h-full object-cover scale-105" />
   </transition>
 
   
@@ -120,14 +111,15 @@
 
     <div class="relative bg-white/80 backdrop-blur-md px-4 md:px-6 py-3 rounded-[40px] shadow-2xl border-4 border-blue-100 max-w-[95%] md:max-w-fit">
 
-      <p class="text-center text-sm sm:text-base md:text-xl font-semibold text-purple-700 font-[cursive] leading-snug">
+      <p class="text-center text-sm sm:text-base md:text-xl font-semibold text-purple-700  leading-snug">
 
         💬
 
-        <transition name="fade" mode="out-in">
+        <transition     @click="playStoryFromPage"
+ name="fade" mode="out-in">
           <div :key="currentPage" class="inline">
 
-            <span
+            <span class="leading-snug cursor-pointer hover:scale-105 transition"
               v-for="(word, index) in currentSentenceData.words"
               :key="index"
               :class="[
@@ -174,7 +166,7 @@
     </div>
 
     <!-- TEXT -->
-    <span class="text-sm md:text-lg font-semibold text-purple-700 font-[cursive] whitespace-nowrap">
+    <span class="text-sm md:text-lg font-semibold text-purple-700  whitespace-nowrap">
       📖 Page {{ currentPage + 1 }} / {{ story.pages.length }}
     </span>
 
@@ -195,24 +187,34 @@
     </div>
 
     <!-- NOT FOUND -->
-    <div v-else class="min-h-[80vh] flex items-center justify-center px-6">
-      <div class="bg-white max-w-3xl w-full rounded-[40px] shadow-2xl p-10 text-center border-[12px] border-pink-200">
-        <div class="text-8xl mb-8">📚😢</div>
-        <h1 class="text-5xl font-extrabold text-pink-500">Oops!</h1>
-        <p class="mt-8 text-2xl">Story not found</p>
-      </div>
-    </div>
+    <NotFound v-else />
 
   </div>
 </template>
 
 <script setup>
-import { computed, ref, watch, onMounted } from "vue"
+import {
+  computed,
+  ref,
+  watch,
+  onMounted,
+  onUnmounted
+} from "vue"
+import NotFound from "../components/NotFound.vue"
 import { useRoute } from "vue-router"
+import Loadder from "../components/Loadder.vue"
 
 // import story1 from "../assets/audio/story1.mp3"
 // import story2 from "../assets/audio/story2.mp3"
 // import story3 from "../assets/audio/story3.mp3"
+
+const popSound = new Audio("../assets/sounds/pop.wav")
+
+function playPop() {
+  popSound.currentTime = 0
+  popSound.volume = 0.4
+  popSound.play()
+}
 
 
 const heroRef = ref(null)
@@ -223,16 +225,48 @@ const toggleHeroFullScreen = async () => {
 
   if (!document.fullscreenElement) {
     await el.requestFullscreen()
-    stopAudio()
-
     playStoryFromPage()
     isFullScreen.value = true
   } else {
     await document.exitFullscreen()
-    stopAudio()
     isFullScreen.value = false
   }
 }
+
+/* ================= FULLSCREEN EXIT EVENT ================= */
+
+const handleFullScreenChange = () => {
+  const isNowFullscreen = !!document.fullscreenElement
+
+  isFullScreen.value = isNowFullscreen
+
+  // EXITED FULLSCREEN
+  if (!isNowFullscreen) {
+    stopAudio()
+  }
+}
+
+/* ================= MOUNT ================= */
+
+onMounted(() => {
+  loadStories()
+
+  document.addEventListener(
+    "fullscreenchange",
+    handleFullScreenChange
+  )
+})
+
+/* ================= UNMOUNT ================= */
+
+onUnmounted(() => {
+  document.removeEventListener(
+    "fullscreenchange",
+    handleFullScreenChange
+  )
+
+  stopAudio()
+})
 
 const heroClass = computed(() =>
   isFullScreen.value
@@ -373,6 +407,7 @@ const stopAudio = () => {
 
 /* ================= NAV ================= */
 const nextPage = () => {
+  playPop()
   if (currentPage.value < story.value.pages.length - 1) {
     currentPage.value++
     stopAudio()
@@ -380,6 +415,7 @@ const nextPage = () => {
 }
 
 const prevPage = () => {
+  playPop()
   if (currentPage.value > 0) {
     currentPage.value--
     stopAudio()
