@@ -206,6 +206,9 @@ import Loadder from "../components/Loadder.vue"
 
 import router from "../router"
 
+import { globalStore } from "../pinaGlobal/global"
+const global = globalStore()
+
 
 const popSound = new Audio("../assets/sounds/pop.wav")
 
@@ -332,19 +335,39 @@ const currentSentenceData = computed(() => {
   return story.value.pages[currentPage.value].sentences[currentSentence.value]
 })
 
-console.log("Current sentence data:", currentSentenceData) // log the current sentence data
+console.log("Current sentence data:", currentSentenceData)
+console.log("Is kid subscribed:", global.isKidSubscribed) // log the current sentence data
 
 /* ================= AUDIO ================= */
 const playStoryFromPage = () => {
-  if(currentPage.value >= 2){
-    alert('page'+ currentPage.value)
+  // alert(global.isKidSubscribed+'page: '+currentPage.value)
 
-    router.push("/subscribe?isAgeGate=subs")
+ // ✅ subscribed users
+  if (global.isKidSubscribed) {
 
-  }else{
-     playAudio(story.value.pages[currentPage.value].audio)
+    playAudio(
+      story.value.pages[currentPage.value].audio
+    )
 
   }
+
+  // ✅ free pages
+  else if (currentPage.value < 2) {
+
+    playAudio(
+      story.value.pages[currentPage.value].audio
+    )
+
+  }
+
+  // ❌ locked pages
+  else {
+
+    alert("🌟 Subscribe to unlock all magical stories!")
+    router.push("/subscribe?isAgeGate=subs")
+  }
+
+
 }
 
 const playAudio = (audioFile) => {
