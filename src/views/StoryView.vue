@@ -14,7 +14,10 @@
     <Loadder v-if="loading" />
 
     <!-- STORY -->
-    <div v-if="story" class="max-w-6xl mx-auto">
+ <div v-if="story" class="max-w-6xl mx-auto">
+
+
+  <MobileHint  />
 
 
 
@@ -65,7 +68,19 @@ enter-active-class="transition-all duration-500 ease-out"
   leave-from-class="opacity-100 translate-x-0"
   leave-to-class="opacity-0 -translate-x-10"
   >
-      <img :key="currentPage" :src="story.pages[currentPage].img" class="w-full h-full object-cover scale-105" />
+  <div
+  class="w-full
+         aspect-[16/9]
+         overflow-hidden
+         rounded-3xl"
+>
+
+  <img
+    :src="story.pages[currentPage].img"
+    class="w-full h-full object-contain sm:object-cover"
+  />
+
+</div>
   </transition>
 
   
@@ -107,74 +122,144 @@ enter-active-class="transition-all duration-500 ease-out"
  
 
   <!-- 💬 CLOUD STORY TEXT (RESPONSIVE) -->
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center px-4">
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-full flex justify-center px-2">
+  
+  <div class="relative 
+              bg-white/80 backdrop-blur-md 
+              px-3 py-1.5 md:px-6 md:py-3 
+              rounded-full md:rounded-[40px] 
+              shadow-xl border-2 md:border-4 border-blue-100 
+              max-w-[95%] md:max-w-fit
+              overflow-hidden">
 
-    <div class="relative bg-white/80 backdrop-blur-md px-4 md:px-6 py-3 rounded-[40px] shadow-2xl border-4 border-blue-100 max-w-[95%] md:max-w-fit">
+    <p class="flex items-center whitespace-nowrap text-[11px] sm:text-sm md:text-xl font-semibold text-purple-700">
 
-      <p class="text-center text-sm sm:text-base md:text-xl font-semibold text-purple-700  leading-snug">
+      💬
 
-        💬
+      <transition name="fade" mode="out-in">
+        <div :key="currentPage" class="flex items-center whitespace-nowrap ml-2">
 
-        <transition     @click="playStoryFromPage"
- name="fade" mode="out-in">
-          <div :key="currentPage" class="inline">
+          <span
+            v-for="(word, index) in currentSentenceData.words"
+            :key="index"
+            @click="playStoryFromPage"
+            class="inline-block mx-1 px-1 py-[2px] rounded-lg transition-all duration-300 cursor-pointer"
+            :class="[
+              activeWordIndex === index
+                ? 'bg-yellow-300 text-purple-900 scale-105 shadow-md'
+                : 'text-gray-700'
+            ]"
+          >
+            {{ word.text }}
+          </span>
 
-            <span class="leading-snug cursor-pointer hover:scale-105 transition"
-              v-for="(word, index) in currentSentenceData.words"
-              :key="index"
-              :class="[
-                'inline-block mx-1 px-2 py-1 rounded-xl transition-all duration-300',
-                activeWordIndex === index
-                  ? 'bg-yellow-300 text-purple-900 scale-110 shadow-lg animate-pulse'
-                  : 'text-gray-700'
-              ]"
-            >
-              {{ word.text }}
-            </span>
+        </div>
+      </transition>
 
-          </div>
-        </transition>
-
-      </p>
-
-    </div>
-
-    
+    </p>
 
   </div>
+</div>
   
 
 </div>
 
+
+
+
+
 <!-- 🟦 WHITE INFO BOX UNDER IMAGE -->
-<!-- 🟦 WHITE INFO BOX UNDER IMAGE (COMPACT) -->
-<div class="max-w-4xl mx-auto -mt-6 relative z-10">
+<div
+  class="max-w-xl mx-auto mt-6 relative z-10 bg-white shadow-xl border-4 border-pink-100
+         px-2 sm:px-6 py-1.5
+         rounded-full sm:rounded-[50px]"
+>
 
-  <div class="bg-white rounded-[30px] shadow-xl border-4 border-pink-100 px-6 py-2">
-
-  <div class="flex items-center justify-center gap-4">
+  <div class="flex items-center justify-center sm:justify-center gap-2 sm:gap-5 flex-nowrap">
 
     <!-- DOTS -->
-    <div class="flex gap-3 items-center">
+    <div class="flex items-center gap-1 sm:gap-3 shrink-0">
       <div
         v-for="(p, index) in story.pages"
         :key="index"
         @click="goToPage(index)"
-        class="w-4 h-4 rounded-full cursor-pointer transition"
-        :class="currentPage === index ? 'bg-pink-500 scale-125' : 'bg-pink-200'"
+        class="rounded-full cursor-pointer transition"
+        :class="[
+          currentPage === index
+            ? 'bg-pink-500 shadow-lg'
+            : 'bg-pink-200 hover:bg-pink-300',
+          'w-2 h-2 sm:w-4 sm:h-4'
+        ]"
       ></div>
     </div>
 
-    <!-- TEXT -->
-    <span class="text-sm md:text-lg font-semibold text-purple-700  whitespace-nowrap">
-      📖 Page {{ currentPage + 1 }} / {{ story.pages.length }}
+    <!-- PAGE INFO -->
+    <span
+      class="font-semibold text-purple-700 whitespace-nowrap
+             text-[10px] sm:text-base shrink-0"
+    >
+      📖 {{ currentPage + 1 }}/{{ story.pages.length }}
     </span>
 
+    <!-- CONTROLS -->
+    <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+
+      <!-- PREV -->
+      <button
+        @click="prevPage"
+        class="flex items-center justify-center rounded-full
+               bg-pink-100 text-pink-600
+               w-6 h-6 sm:w-10 sm:h-10 text-[10px] sm:text-lg
+               hover:scale-110 transition"
+      >
+        ⬅
+      </button>
+
+      <!-- INPUT -->
+      <input
+        v-model="pageInput"
+        type="number"
+        min="1"
+        :max="story.pages.length"
+        @keyup.enter="jumpToPage"
+        placeholder="Pg"
+        class="text-center font-bold text-purple-700 outline-none
+               border border-pink-100 bg-pink-50
+               rounded-full
+               w-8 h-6 text-[10px]
+               sm:w-20 sm:h-8 sm:text-sm sm:px-2
+               focus:border-pink-400 focus:bg-white"
+      />
+
+      <!-- GO -->
+      <button
+        @click="jumpToPage"
+        class="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold
+               rounded-full transition hover:scale-105
+               text-[9px] px-2 py-[2px]
+               sm:text-xs sm:px-3 sm:py-1"
+      >
+        Go
+      </button>
+
+      <!-- NEXT -->
+      <button
+        @click="nextPage"
+        class="flex items-center justify-center rounded-full
+               bg-blue-100 text-blue-600
+               w-6 h-6 sm:w-10 sm:h-10 text-[10px] sm:text-lg
+               hover:scale-110 transition"
+      >
+        ➡
+      </button>
+
+    </div>
+
   </div>
-
 </div>
 
-</div>
+<!-- 🟦 WHITE INFO BOX UNDER IMAGE (COMPACT) -->
+
 
   
 
@@ -203,6 +288,7 @@ import {
 import NotFound from "../components/NotFound.vue"
 import { useRoute } from "vue-router"
 import Loadder from "../components/Loadder.vue"
+import MobileHint from "../components/ForMobile.vue"
 
 import router from "../router"
 
@@ -471,6 +557,26 @@ watch(
     stopAudio()
   }
 )
+
+
+const pageInput = ref("")
+
+const jumpToPage = () => {
+  const page = Number(pageInput.value)
+
+  if (
+    !isNaN(page) &&
+    page >= 1 &&
+    page <= story.value.pages.length
+  ) {
+    goToPage(page - 1)
+
+    pageInput.value = ""
+  }
+}
+
+
+
 </script>
 
 <style scoped>
