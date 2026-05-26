@@ -105,7 +105,7 @@
     >
 
       <div
-        v-if="mobileMenu"
+        v-if="global.mobileMenu"
         class="md:hidden border-t border-pink-100 bg-white/95 backdrop-blur-xl px-4 py-5 shadow-xl"
       >
 
