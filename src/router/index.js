@@ -6,7 +6,7 @@ import Register from "../views/Register.vue"
 import Login from "../views/Login.vue"
 import ForgotPassword from "../views/Forgot-Password.vue"
 import AgeGate from "../components/Age-Gate.vue"
-
+import Subscribe from "../views/Subscribe.vue"
 const routes = [
   {
     path: "/",
@@ -20,6 +20,11 @@ const routes = [
 
   {
     path: "/login",
+    component: AgeGate,
+  },
+
+   {
+    path: "/subscribe",
     component: AgeGate,
   },
 
@@ -42,6 +47,11 @@ const routes = [
     path: "/parent-register",
     component: Register,
   },
+
+  {
+    path: "/parent-subscribe",
+    component: Subscribe,
+  }
 ]
 
 const router = createRouter({

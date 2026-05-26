@@ -204,11 +204,12 @@ import NotFound from "../components/NotFound.vue"
 import { useRoute } from "vue-router"
 import Loadder from "../components/Loadder.vue"
 
-// import story1 from "../assets/audio/story1.mp3"
-// import story2 from "../assets/audio/story2.mp3"
-// import story3 from "../assets/audio/story3.mp3"
+import router from "../router"
+
 
 const popSound = new Audio("../assets/sounds/pop.wav")
+
+
 
 
 
@@ -335,7 +336,15 @@ console.log("Current sentence data:", currentSentenceData) // log the current se
 
 /* ================= AUDIO ================= */
 const playStoryFromPage = () => {
-  playAudio(story.value.pages[currentPage.value].audio)
+  if(currentPage.value >= 2){
+    alert('page'+ currentPage.value)
+
+    router.push("/subscribe?isAgeGate=subs")
+
+  }else{
+     playAudio(story.value.pages[currentPage.value].audio)
+
+  }
 }
 
 const playAudio = (audioFile) => {

@@ -124,7 +124,7 @@ import { ref, onMounted, onUnmounted } from "vue"
 import { useRouter, useRoute } from "vue-router"
 const route = useRoute()
 const router = useRouter()
-const isLogPage = route.query.isLogPage === "true"
+const isAgeGate = route.query.isAgeGate
 
 
 
@@ -193,11 +193,12 @@ const checkAnswer = () => {
     error.value = false
 
     // 👉 NAVIGATE IF 
-    if (isLogPage===true) {
-    console.log("Is Login Page....: " + isLogPage)
+    if (isAgeGate === 'log') {
       router.push("/parent-login")
-    } else {
+    } else if (isAgeGate === 'reg') {
       router.push("/parent-register")
+    }else if(isAgeGate === 'subs') {
+      router.push("/parent-subscribe")
     }
   } else {
     error.value = true
