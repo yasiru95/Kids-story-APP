@@ -38,7 +38,7 @@
       >
 
         <!-- LOGGED IN -->
-        <template v-if="isLoggedIn">
+        <template v-if="global.isLoggedIn">
 
           <router-link
             to="/"
@@ -55,7 +55,7 @@
           </router-link>
 
           <button
-            @click="logout"
+            @click="global.logout()"
             class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-5 lg:px-6 py-2.5 rounded-full text-sm lg:text-base font-bold shadow-xl hover:scale-105 transition cursor-pointer"
           >
             Logout
@@ -67,15 +67,15 @@
         <template v-else>
 
           <router-link
-            to="/login"
+            :to="{ path: '/login', query: { isLogPage: 'true' } }"
             class="px-4 py-2 rounded-full text-sm lg:text-base font-bold text-purple-700 hover:bg-pink-100 hover:text-pink-600 transition cursor-pointer"
           >
             Login
           </router-link>
 
           <router-link
-            to="/register"
-            class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-5 lg:px-6 py-2.5 rounded-full text-sm lg:text-base font-bold shadow-xl hover:scale-105 transition cursor-pointer"
+          :to="{ path: '/register', query: { isLogPage: 'false' } }"            
+          class="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-5 lg:px-6 py-2.5 rounded-full text-sm lg:text-base font-bold shadow-xl hover:scale-105 transition cursor-pointer"
           >
             Register
           </router-link>
@@ -86,7 +86,7 @@
 
       <!-- MOBILE BUTTON -->
       <button
-        @click="mobileMenu = !mobileMenu"
+        @click="global.mobileMenu = !global.mobileMenu"
         class="md:hidden flex h-11 w-11 items-center justify-center rounded-xl bg-purple-100 text-2xl text-purple-700 shadow-lg cursor-pointer"
       >
         ☰
@@ -112,7 +112,7 @@
         <div class="flex flex-col gap-3">
 
           <!-- LOGGED IN -->
-          <template v-if="isLoggedIn">
+          <template v-if="global.isLoggedIn">
 
             <router-link
               to="/"
@@ -129,7 +129,7 @@
             </router-link>
 
             <button
-              @click="logout"
+              @click="global.logout()"
               class="rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 px-5 py-4 text-lg font-bold text-white shadow-xl"
             >
               Logout
@@ -141,14 +141,15 @@
           <template v-else>
 
             <router-link
-              to="/login"
+              :to="{ path: '/login', query: { isLogPage: 'true' } }"
               class="rounded-2xl bg-pink-50 px-5 py-4 text-lg font-bold text-pink-600 hover:bg-pink-100 transition"
             >
               Login
             </router-link>
 
             <router-link
-              to="/register"
+
+              :to="{ path: '/register', query: { isLogPage: 'false' } }"
               class="rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 px-5 py-4 text-lg font-bold text-white shadow-xl"
             >
               Register
@@ -167,25 +168,21 @@
 
 <script setup>
 import { ref } from "vue"
+import { globalStore } from "../pinaGlobal/global"
+const global = globalStore()
 
 /* ========================= */
 /* LOGIN STATE */
 /* ========================= */
 
-const isLoggedIn = ref(false)
-
 /* ========================= */
 /* MOBILE MENU */
 /* ========================= */
 
-const mobileMenu = ref(false)
 
 /* ========================= */
 /* LOGOUT */
 /* ========================= */
 
-const logout = () => {
-  isLoggedIn.value = false
-  mobileMenu.value = false
-}
+
 </script>

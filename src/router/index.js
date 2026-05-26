@@ -5,6 +5,7 @@ import StoryView from "../views/StoryView.vue"
 import Register from "../views/Register.vue"
 import Login from "../views/Login.vue"
 import ForgotPassword from "../views/Forgot-Password.vue"
+import AgeGate from "../components/Age-Gate.vue"
 
 const routes = [
   {
@@ -14,12 +15,12 @@ const routes = [
 
   {
     path: "/register",
-    component: Register,
+    component: AgeGate,
   },
 
   {
     path: "/login",
-    component: Login,
+    component: AgeGate,
   },
 
      {
@@ -30,6 +31,16 @@ const routes = [
   {
     path: "/story/:id",
     component: StoryView,
+  },
+
+  {
+    path: "/parent-login",
+    component: Login,
+  },
+
+  {
+    path: "/parent-register",
+    component: Register,
   },
 ]
 

@@ -106,7 +106,7 @@
           </div>
 
           <!-- FORM -->
-          <form class="mt-10 space-y-6">
+          <form class="mt-10 space-y-6" @submit.prevent="handleLogin">
 
             <!-- EMAIL -->
             <div>
@@ -210,6 +210,14 @@
 </template>
 
 <script setup>
+
+import { globalStore } from "../pinaGlobal/global"
+const global = globalStore()
+
+const handleLogin = () => {
+    global.login()
+ 
+}
 </script>
 
 <style scoped>
@@ -231,4 +239,4 @@
   }
 }
 </style>
-```
+
