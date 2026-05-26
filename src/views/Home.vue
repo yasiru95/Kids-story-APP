@@ -1,6 +1,10 @@
 ﻿<template>
-  <div class="min-h-screen overflow-hidden bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 font-['Fredoka']">
+  
 
+  <NavBar />
+
+  
+  <div class="min-h-screen overflow-hidden bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 font-['Fredoka']">
     <!-- HERO -->
     <div class="w-full overflow-hidden">
       <HeroSlider
@@ -127,13 +131,15 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue"
+
 import HeroSlider from "../components/HeroSlider.vue"
 import StoryCard from "../components/StoryCard.vue"
-// import CuteHeading from "../components/CuteHeading.vue"
+import CuteHeading from "../components/CuteHeading.vue"
 import { heroSlides } from "../data/storyData.js"
 import FooterPart from "../components/FooterPart.vue"
 import catergory from "../components/Catergory.vue"
 import Loadder from "../components/Loadder.vue"
+import NavBar from "../components/NavBar.vue"
 
 const heroIndex = ref(0)
 const featuredStories = ref([])

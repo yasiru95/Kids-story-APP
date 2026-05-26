@@ -46,6 +46,8 @@
             @click="playPop"
       @mouseenter="playPop"
             class="
+              cursor-pointer
+
               relative
               h-28 w-28 sm:h-40 sm:w-40 md:h-56 md:w-56 lg:h-64 lg:w-64
               rounded-full
@@ -66,6 +68,7 @@
                 rounded-full
                 border-4 border-white
                 object-cover
+
               "
             />
 

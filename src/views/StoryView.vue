@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-10 px-4 overflow-hidden">
 
     <!-- BACK -->
-    <div class="max-w-7xl mx-auto mb-6">
+    <div class="max-w-7xl mx-auto ">
       <router-link
         to="/"
         class="bg-white px-6 py-3 rounded-full shadow-xl font-bold text-purple-700 hover:scale-105 transition inline-block"
@@ -209,6 +209,8 @@ import Loadder from "../components/Loadder.vue"
 // import story3 from "../assets/audio/story3.mp3"
 
 const popSound = new Audio("../assets/sounds/pop.wav")
+
+
 
 function playPop() {
   popSound.currentTime = 0
