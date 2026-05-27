@@ -1,11 +1,11 @@
 ﻿<template>
-  <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-10 px-4 overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-[2.5rem] px-[1rem] overflow-hidden">
 
     <!-- BACK -->
     <div class="max-w-7xl mx-auto ">
       <router-link
         to="/"
-        class="bg-white px-6 py-3 rounded-full shadow-xl font-bold text-purple-700 hover:scale-105 transition inline-block"
+        class="bg-white px-[1.5rem] py-[0.75rem] rounded-full shadow-xl font-bold text-purple-700 hover:scale-105 transition inline-block"
       >
         ⬅ Back Home
       </router-link>
@@ -16,20 +16,17 @@
     <!-- STORY -->
  <div v-if="story" class="max-w-6xl mx-auto">
 
-
-  <MobileHint  />
-
-
+  <MobileHint />
 
 <!-- PLAY + FULLSCREEN BUTTONS -->
-<div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 px-2 sm:px-0">
+<div class="flex flex-col sm:flex-row justify-center items-center gap-[1rem] mb-[2rem] px-[0.5rem] sm:px-0">
 
   <!-- PLAY -->
   <button
     @click="playStoryFromPage"
-    class="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 rounded-full text-xl sm:text-2xl font-bold text-white shadow-2xl
+    class="w-full sm:w-auto px-[2rem] sm:px-[2.5rem] py-[1rem] sm:py-[1.25rem] rounded-full text-[1.25rem] sm:text-[1.5rem] font-bold text-white shadow-2xl
             bg-gradient-to-r from-purple-500 to-pink-500
-    hover:scale-110 transition"
+            hover:scale-110 transition"
   >
     🎧 Play Story
   </button>
@@ -37,63 +34,54 @@
   <!-- FULLSCREEN -->
   <button
     @click="toggleHeroFullScreen"
-    class="w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-5 rounded-full text-xl sm:text-2xl font-bold text-purple-700 shadow-2xl
-    bg-white hover:scale-110 transition border-2 border-purple-200"
+    class="w-full sm:w-auto px-[1.5rem] sm:px-[2rem] py-[1rem] sm:py-[1.25rem] rounded-full text-[1.25rem] sm:text-[1.5rem] font-bold text-purple-700 shadow-2xl
+    bg-white hover:scale-110 transition border-[0.125rem] border-purple-200"
   >
     ⛶ Full Screen
   </button>
 
 </div>
 
-
-  
-
-
-
 <!-- HERO -->
 <div
   ref="heroRef"
-  class="relative overflow-hidden shadow-2xl border-6 sm:border-8 border-white
-         w-full h-[320px] sm:h-[420px] md:h-[520px] lg:h-[620px] xl:h-[700px] rounded-[32px] sm:rounded-[40px]
-         bg-black"
+  class="relative
+    overflow-hidden
+    shadow-2xl
+    border-[0.25rem] sm:border-[0.375rem]
+    border-white
+    w-full
+    h-[15rem] sm:h-[26rem] md:h-[32rem] lg:h-[38rem] xl:h-[44rem]
+    rounded-[1.75rem] sm:rounded-[2.5rem]
+    bg-black"
 >
+
   <!-- IMAGE -->
-
   <transition 
-   mode="out-in"
-enter-active-class="transition-all duration-500 ease-out"
-  leave-active-class="transition-all duration-500 ease-in"
-  enter-from-class="opacity-0 translate-x-10"
-  enter-to-class="opacity-100 translate-x-0"
-  leave-from-class="opacity-100 translate-x-0"
-  leave-to-class="opacity-0 -translate-x-10"
+    mode="out-in"
+    enter-active-class="transition-all duration-500 ease-out"
+    leave-active-class="transition-all duration-500 ease-in"
+    enter-from-class="opacity-0 translate-x-[2.5rem]"
+    enter-to-class="opacity-100 translate-x-0"
+    leave-from-class="opacity-100 translate-x-0"
+    leave-to-class="opacity-0 -translate-x-[2.5rem]"
   >
-  <div
-  class="w-full
-         aspect-[16/9]
-         overflow-hidden
-         rounded-3xl"
->
-
-  <img
-    :src="story.pages[currentPage].img"
-    class="w-full h-full object-contain sm:object-cover"
-  />
-
-</div>
+    <img
+      :key="currentPage"
+      :src="story.pages[currentPage].img"
+      class="absolute inset-0 w-full h-full object-contain md:object-cover"
+    />
   </transition>
-
-  
 
   <!-- DARK OVERLAY -->
   <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
 
-  <!-- 🌈 TOP TITLE (RESPONSIVE) -->
-  <div class="absolute top-4 left-1/2 -translate-x-1/2 w-full px-4 flex justify-center">
+  <!-- TOP TITLE -->
+  <div class="absolute top-[1rem] left-1/2 -translate-x-1/2 w-full px-[1rem] flex justify-center">
 
-    <div class="bg-white/90 backdrop-blur-md px-4 md:px-8 py-2 md:py-4 rounded-full shadow-xl border-2 border-pink-200 text-center animate-float max-w-[95%]">
+    <div class="bg-white/90 backdrop-blur-md px-[1rem] md:px-[2rem] py-[0.5rem] md:py-[1rem] rounded-full shadow-xl border-[0.125rem] border-pink-200 text-center animate-float max-w-[95%]">
 
-      <h1 class="text-lg sm:text-xl md:text-3xl lg:text-4xl font-extrabold text-pink-600 truncate">
+      <h1 class="text-[1.125rem] sm:text-[1.25rem] md:text-[1.875rem] lg:text-[2.25rem] font-extrabold text-pink-600 truncate">
         {{ story.title }}
       </h1>
 
@@ -101,84 +89,104 @@ enter-active-class="transition-all duration-500 ease-out"
 
   </div>
 
-  <!-- ⬅ LEFT ARROW -->
+  <!-- LEFT -->
   <button
     @click="prevPage"
-    class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/90 hover:bg-white shadow-2xl flex items-center justify-center text-2xl md:text-3xl text-purple-600 hover:scale-110 transition"
+    class="absolute left-[0.5rem] md:left-[1.5rem] top-1/2 -translate-y-1/2 
+           w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem]
+           rounded-full bg-white/90 hover:bg-white shadow-2xl 
+           flex items-center justify-center 
+           text-[1.5rem] md:text-[2rem] 
+           text-purple-600 hover:scale-110 transition"
   >
     ❮
   </button>
 
-  <!-- ➡ RIGHT ARROW -->
+  <!-- RIGHT -->
   <button
     @click="nextPage"
-    class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/90 hover:bg-white shadow-2xl flex items-center justify-center text-2xl md:text-3xl text-purple-600 hover:scale-110 transition"
+    class="absolute right-[0.5rem] md:right-[1.5rem] top-1/2 -translate-y-1/2 
+           w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem]
+           rounded-full bg-white/90 hover:bg-white shadow-2xl 
+           flex items-center justify-center 
+           text-[1.5rem] md:text-[2rem] 
+           text-purple-600 hover:scale-110 transition"
   >
     ❯
   </button>
 
-  <!-- FLOATING ICONS -->
-  <div class="absolute top-16 left-6 text-3xl md:text-4xl animate-bounce">🌟</div>
- 
-
-  <!-- 💬 CLOUD STORY TEXT (RESPONSIVE) -->
-  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-full flex justify-center px-2">
-  
-  <div class="relative 
-              bg-white/80 backdrop-blur-md 
-              px-3 py-1.5 md:px-6 md:py-3 
-              rounded-full md:rounded-[40px] 
-              shadow-xl border-2 md:border-4 border-blue-100 
-              max-w-[95%] md:max-w-fit
-              overflow-hidden">
-
-    <p class="flex items-center whitespace-nowrap text-[11px] sm:text-sm md:text-xl font-semibold text-purple-700">
-
-      💬
-
-      <transition name="fade" mode="out-in">
-        <div :key="currentPage" class="flex items-center whitespace-nowrap ml-2">
-
-          <span
-            v-for="(word, index) in currentSentenceData.words"
-            :key="index"
-            @click="playStoryFromPage"
-            class="inline-block mx-1 px-1 py-[2px] rounded-lg transition-all duration-300 cursor-pointer"
-            :class="[
-              activeWordIndex === index
-                ? 'bg-yellow-300 text-purple-900 scale-105 shadow-md'
-                : 'text-gray-700'
-            ]"
-          >
-            {{ word.text }}
-          </span>
-
-        </div>
-      </transition>
-
-    </p>
-
+  <!-- FLOATING -->
+  <div class="absolute top-[4rem] left-[1.5rem] text-[1.875rem] md:text-[2.5rem] animate-bounce">
+    🌟
   </div>
-</div>
+
+  <!-- TEXT BOX -->
+  <div class="absolute bottom-[1rem] left-1/2 -translate-x-1/2 w-full flex justify-center px-[0.5rem]">
   
+    <div class="relative 
+                bg-white/80 backdrop-blur-md 
+                px-[0.75rem] py-[0.375rem] md:px-[1.5rem] md:py-[0.75rem] 
+                rounded-full md:rounded-[2.5rem] 
+                shadow-xl border-[0.125rem] md:border-[0.25rem] border-blue-100 
+                max-w-[95%] md:max-w-fit
+                overflow-hidden">
+
+      <p class="flex items-center whitespace-nowrap text-[0.6875rem] sm:text-[0.875rem] md:text-[1.25rem] font-semibold text-purple-700">
+
+        💬
+
+        <transition name="fade" mode="out-in">
+          <div :key="currentPage" class="flex items-center whitespace-nowrap ml-[0.5rem]">
+
+            <span
+              v-for="(word, index) in currentSentenceData.words"
+              :key="index"
+              @click="playStoryFromPage"
+              class="
+              inline-block 
+              mx-[0.125rem] sm:mx-[0.25rem] 
+              px-[0.125rem] sm:px-[0.25rem] 
+              py-[0.0625rem] sm:py-[0.125rem] 
+              rounded-[0.375rem] sm:rounded-[0.5rem] 
+              text-[0.5rem] sm:text-[0.875rem] md:text-[2rem]
+              transition-all duration-300 cursor-pointer
+              "
+              :class="[
+                activeWordIndex === index
+                  ? 'bg-yellow-300 text-purple-900 scale-105 shadow-md'
+                  : 'text-gray-700'
+              ]"
+            >
+              {{ word.text }}
+            </span>
+
+          </div>
+        </transition>
+
+      </p>
+
+    </div>
+  </div>
 
 </div>
 
-
-
-
-
-<!-- 🟦 WHITE INFO BOX UNDER IMAGE -->
+<!-- WHITE CONTROL BOX -->
 <div
-  class="max-w-xl mx-auto mt-6 relative z-10 bg-white shadow-xl border-4 border-pink-100
-         px-2 sm:px-6 py-1.5
-         rounded-full sm:rounded-[50px]"
+  class="
+       w-[60%] sm:w-full
+       max-w-xl mx-auto mt-[1.5rem]
+       relative z-10 bg-white shadow-xl
+       border-[0.25rem] border-pink-100
+       px-[0.5rem] sm:px-[1.5rem]
+       py-[0.375rem]
+       rounded-full sm:rounded-[3.125rem]
+  "
 >
 
-  <div class="flex items-center justify-center sm:justify-center gap-2 sm:gap-5 flex-nowrap">
+  <div class="flex items-center justify-center gap-[0.5rem] sm:gap-[1.25rem] flex-nowrap">
 
     <!-- DOTS -->
-    <div class="flex items-center gap-1 sm:gap-3 shrink-0">
+    <div class="flex items-center gap-[0.25rem] sm:gap-[0.75rem] shrink-0">
       <div
         v-for="(p, index) in story.pages"
         :key="index"
@@ -188,28 +196,29 @@ enter-active-class="transition-all duration-500 ease-out"
           currentPage === index
             ? 'bg-pink-500 shadow-lg'
             : 'bg-pink-200 hover:bg-pink-300',
-          'w-2 h-2 sm:w-4 sm:h-4'
+          'w-[0.5rem] h-[0.5rem] sm:w-[1rem] sm:h-[1rem]'
         ]"
       ></div>
     </div>
 
-    <!-- PAGE INFO -->
+    <!-- INFO -->
     <span
       class="font-semibold text-purple-700 whitespace-nowrap
-             text-[10px] sm:text-base shrink-0"
+             text-[0.625rem] sm:text-[1rem] shrink-0"
     >
       📖 {{ currentPage + 1 }}/{{ story.pages.length }}
     </span>
 
     <!-- CONTROLS -->
-    <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+    <div class="flex items-center gap-[0.25rem] sm:gap-[0.5rem] shrink-0">
 
       <!-- PREV -->
       <button
         @click="prevPage"
         class="flex items-center justify-center rounded-full
                bg-pink-100 text-pink-600
-               w-6 h-6 sm:w-10 sm:h-10 text-[10px] sm:text-lg
+               w-[1.5rem] h-[1.5rem] sm:w-[2.5rem] sm:h-[2.5rem]
+               text-[0.625rem] sm:text-[1.125rem]
                hover:scale-110 transition"
       >
         ⬅
@@ -226,8 +235,8 @@ enter-active-class="transition-all duration-500 ease-out"
         class="text-center font-bold text-purple-700 outline-none
                border border-pink-100 bg-pink-50
                rounded-full
-               w-8 h-6 text-[10px]
-               sm:w-20 sm:h-8 sm:text-sm sm:px-2
+               w-[2rem] h-[1.5rem] text-[0.625rem]
+               sm:w-[5rem] sm:h-[2rem] sm:text-[0.875rem] sm:px-[0.5rem]
                focus:border-pink-400 focus:bg-white"
       />
 
@@ -236,8 +245,8 @@ enter-active-class="transition-all duration-500 ease-out"
         @click="jumpToPage"
         class="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold
                rounded-full transition hover:scale-105
-               text-[9px] px-2 py-[2px]
-               sm:text-xs sm:px-3 sm:py-1"
+               text-[0.5625rem] px-[0.5rem] py-[0.125rem]
+               sm:text-[0.75rem] sm:px-[0.75rem] sm:py-[0.25rem]"
       >
         Go
       </button>
@@ -247,7 +256,8 @@ enter-active-class="transition-all duration-500 ease-out"
         @click="nextPage"
         class="flex items-center justify-center rounded-full
                bg-blue-100 text-blue-600
-               w-6 h-6 sm:w-10 sm:h-10 text-[10px] sm:text-lg
+               w-[1.5rem] h-[1.5rem] sm:w-[2.5rem] sm:h-[2.5rem]
+               text-[0.625rem] sm:text-[1.125rem]
                hover:scale-110 transition"
       >
         ➡
@@ -258,17 +268,6 @@ enter-active-class="transition-all duration-500 ease-out"
   </div>
 </div>
 
-<!-- 🟦 WHITE INFO BOX UNDER IMAGE (COMPACT) -->
-
-
-  
-
-        
-
-
-      
-
-      
     </div>
 
     <!-- NOT FOUND -->
