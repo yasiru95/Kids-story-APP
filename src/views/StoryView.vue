@@ -2,14 +2,21 @@
   <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-[2.5rem] px-[1rem] overflow-hidden">
 
     <!-- BACK -->
-    <div class="max-w-7xl mx-auto ">
-      <router-link
-        to="/"
-        class="bg-white px-[1.5rem] py-[0.75rem] rounded-full shadow-xl font-bold text-purple-700 hover:scale-105 transition inline-block"
-      >
-        ⬅ Back Home
-      </router-link>
-    </div>
+ <div class="max-w-7xl mx-auto mb-[1rem] sm:mb-0">
+  <router-link
+    to="/"
+    class="inline-flex items-center justify-center
+           w-[60%] ml-[5rem] sm:w-auto
+           px-[1.5rem] py-[0.875rem]
+           sm:px-[1.5rem] sm:py-[0.75rem]
+           rounded-full shadow-xl
+           font-bold text-purple-700
+           bg-white
+           hover:scale-105 transition"
+  >
+    ⬅ Back Home
+  </router-link>
+</div>
 
     <Loadder v-if="loading" />
 
