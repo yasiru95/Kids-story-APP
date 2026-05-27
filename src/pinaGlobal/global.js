@@ -6,7 +6,7 @@ export const globalStore = defineStore("appStore", () => {
   // 🌍 GLOBAL STATE
   const isLoggedIn = ref(false)
   const mobileMenu = ref(false)
-  const isKidSubscribed = false
+  const isKidSubscribed = ref(false)
 
 
   // 🔐 LOGIN
@@ -20,7 +20,7 @@ export const globalStore = defineStore("appStore", () => {
   const logout = () => {
     isLoggedIn.value = false
     mobileMenu.value = false
-    isKidSubscribed = false
+    isKidSubscribed.value = false
     router.push("/")
 
   }
