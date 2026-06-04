@@ -78,6 +78,12 @@
             Terms
           </a>
 
+          <a href="/refund" class="text-gray-600 hover:text-purple-600 transition">
+            Refund Policy
+          </a>
+
+          
+
           <a href="/contact" class="text-gray-600 hover:text-purple-600 transition">
             Contact
           </a>

@@ -10,7 +10,7 @@
     <div class="text-6xl">📱➡️📺</div>
 
     <h2 class="mt-4 text-2xl font-extrabold text-purple-700">
-      Better Experience!
+      Better Experience! (Use laptop or tablet)
     </h2>
 
     <p class="mt-3 text-base text-gray-600 leading-6">

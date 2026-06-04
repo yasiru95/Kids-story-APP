@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="text-center text-3xl md:text-4xl font-medium leading-[70px]">
     <span
       v-for="(word, index) in words"
@@ -23,3 +23,12 @@ const props = defineProps({
   },
 })
 </script>
+
+<style scoped>
+.text-outline {
+  color: white;
+  -webkit-text-stroke: 2px black;
+  font-weight: 800;
+  font-size: 2rem;
+}
+</style> -->

@@ -140,6 +140,7 @@ import FooterPart from "../components/FooterPart.vue"
 import catergory from "../components/Catergory.vue"
 import Loadder from "../components/Loadder.vue"
 import NavBar from "../components/NavBar.vue"
+import api from '../services/Api.js';
 
 const heroIndex = ref(0)
 const featuredStories = ref([])
@@ -200,10 +201,19 @@ const loadStories = async () => {
 
   await new Promise((r) => setTimeout(r, 2000))
 
-  const response = await fetch("/stories.json")
-  const data = await response.json()
+   try {
+        const response = await api.get('/stories');
+        console.log("Loaded stories back: " + response.data[0].title);
 
-  featuredStories.value = data
+          const data = await response.data;
+
+          featuredStories.value = data
+    } catch (error) {
+        console.error(error);
+    }
+
+  // const response = await fetch("/stories.json")
+
   loading.value = false
 }
 

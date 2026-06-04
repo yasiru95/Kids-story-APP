@@ -60,7 +60,7 @@
     w-full
     h-[15rem] sm:h-[26rem] md:h-[32rem] lg:h-[38rem] xl:h-[44rem]
     rounded-[1.75rem] sm:rounded-[2.5rem]
-    bg-black"
+    bg-black,     isFullScreen"
 >
 
   <!-- IMAGE -->
@@ -157,11 +157,12 @@
               rounded-[0.375rem] sm:rounded-[0.5rem] 
               text-[0.5rem] sm:text-[0.875rem] md:text-[2rem]
               transition-all duration-300 cursor-pointer
+              hover:scale-110 hover:shadow-md
               "
               :class="[
                 activeWordIndex === index
-                  ? 'bg-yellow-300 text-purple-900 scale-105 shadow-md'
-                  : 'text-gray-700'
+                  ? 'text-highlight scale-105 shadow-md'
+                  : 'text-outline'
               ]"
             >
               {{ word.text }}
@@ -180,7 +181,7 @@
 <!-- WHITE CONTROL BOX -->
 <div
   class="
-       w-[60%] sm:w-full
+       w-[90%] sm:w-full
        max-w-xl mx-auto mt-[1.5rem]
        relative z-10 bg-white shadow-xl
        border-[0.25rem] border-pink-100
@@ -190,10 +191,10 @@
   "
 >
 
-  <div class="flex items-center justify-center gap-[0.5rem] sm:gap-[1.25rem] flex-nowrap">
+  <div class="flex items-center justify-center gap-[1rem] sm:gap-[1.25rem] flex-nowrap">
 
     <!-- DOTS -->
-    <div class="flex items-center gap-[0.25rem] sm:gap-[0.75rem] shrink-0">
+    <div class="flex items-center gap-[0.75rem] sm:gap-[0.75rem] shrink-0">
       <div
         v-for="(p, index) in story.pages"
         :key="index"
@@ -217,7 +218,7 @@
     </span>
 
     <!-- CONTROLS -->
-    <div class="flex items-center gap-[0.25rem] sm:gap-[0.5rem] shrink-0">
+    <div class="flex items-center gap-[0.75rem] sm:gap-[0.5rem] shrink-0">
 
       <!-- PREV -->
       <button
@@ -238,12 +239,12 @@
         min="1"
         :max="story.pages.length"
         @keyup.enter="jumpToPage"
-        placeholder="Pg"
+        placeholder="Page No"
         class="text-center font-bold text-purple-700 outline-none
                border border-pink-100 bg-pink-50
                rounded-full
-               w-[2rem] h-[1.5rem] text-[0.625rem]
-               sm:w-[5rem] sm:h-[2rem] sm:text-[0.875rem] sm:px-[0.5rem]
+               w-[5rem]  h-[1.5rem] text-[0.625rem]
+              sm:text-[0.875rem] 
                focus:border-pink-400 focus:bg-white"
       />
 
@@ -319,6 +320,7 @@ const heroRef = ref(null)
 const isFullScreen = ref(false)
 
 const toggleHeroFullScreen = async () => {
+    isFullScreen.value = !isFullScreen.value
   const el = heroRef.value
 
   if (!document.fullscreenElement) {
@@ -398,6 +400,7 @@ const loadStories = async () => {
 
     // convert json
     const data = await response.json()
+    console.log('Parsed data:', data) // log the parsed data
 
     // pass data to model
     stories.value = data
@@ -628,4 +631,60 @@ const jumpToPage = () => {
   opacity: 0;
   transform: translateX(-100%);
 }
+
+/* Mobile */
+.text-outline {
+    color: white;
+    font-weight: 900;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+
+
+
+
+.text-highlight {
+    color: yellow;
+    font-weight: 900;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+
+
+/* Tablet */
+@media (min-width: 640px) {
+    .text-outline, .text-highlight {
+        text-shadow:
+            -2px -2px 0 #000,
+             2px -2px 0 #000,
+            -2px  2px 0 #000,
+             2px  2px 0 #000,
+            -2px  0 0 #000,
+             2px  0 0 #000,
+             0 -2px 0 #000,
+             0  2px 0 #000;
+    }
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+    .text-outline, .text-highlight {
+        text-shadow:
+            -3px -3px 0 #000,
+             3px -3px 0 #000,
+            -3px  3px 0 #000,
+             3px  3px 0 #000,
+            -3px  0 0 #000,
+             3px  0 0 #000,
+             0 -3px 0 #000,
+             0  3px 0 #000;
+    }
+}
+
 </style>

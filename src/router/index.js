@@ -7,6 +7,12 @@ import Login from "../views/Login.vue"
 import ForgotPassword from "../views/Forgot-Password.vue"
 import AgeGate from "../components/Age-Gate.vue"
 import Subscribe from "../views/Subscribe.vue"
+import KidAccount from "../views/Kid-Account.vue"
+import privcyPolicy from "../views/Privacy.vue"
+import Terms from "../views/Terms.vue"
+import Refund from "../views/Refund.vue"
+
+
 const routes = [
   {
     path: "/",
@@ -51,6 +57,23 @@ const routes = [
   {
     path: "/parent-subscribe",
     component: Subscribe,
+  },
+
+  {
+    path: "/kid-account",
+    component: KidAccount,
+  },
+  {
+    path: "/privacy",
+    component: privcyPolicy,
+  },
+  {
+    path: "/terms",
+    component: Terms,
+  },
+  {
+    path: "/refund",
+    component: Refund,
   }
 ]
 
