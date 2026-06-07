@@ -67,6 +67,9 @@
 </template>
 
 <script setup>
+import { Story } from '../models/Story';
+
+
 const props = defineProps({
   story: {
     type: Object,

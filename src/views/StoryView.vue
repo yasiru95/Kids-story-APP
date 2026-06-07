@@ -88,7 +88,7 @@
 
     <div class="bg-white/90 backdrop-blur-md px-[1rem] md:px-[2rem] py-[0.5rem] md:py-[1rem] rounded-full shadow-xl border-[0.125rem] border-pink-200 text-center animate-float max-w-[95%]">
 
-      <h1 class="text-[1.125rem] sm:text-[1.25rem] md:text-[1.875rem] lg:text-[2.25rem] font-extrabold text-pink-600 truncate">
+      <h1 class="text-[0.575rem] sm:text-[1.25rem] md:text-[1.35rem] lg:text-[1.50rem] font-extrabold text-pink-600 truncate">
         {{ story.title }}
       </h1>
 
@@ -131,19 +131,26 @@
   <div class="absolute bottom-[1rem] left-1/2 -translate-x-1/2 w-full flex justify-center px-[0.5rem]">
   
     <div class="relative 
-                bg-white/80 backdrop-blur-md 
+                bg-white/20 backdrop-blur-md 
                 px-[0.75rem] py-[0.375rem] md:px-[1.5rem] md:py-[0.75rem] 
                 rounded-full md:rounded-[2.5rem] 
                 shadow-xl border-[0.125rem] md:border-[0.25rem] border-blue-100 
                 max-w-[95%] md:max-w-fit
                 overflow-hidden">
 
-      <p class="flex items-center whitespace-nowrap text-[0.6875rem] sm:text-[0.875rem] md:text-[1.25rem] font-semibold text-purple-700">
+      <p class="flex flex-wrap
+  justify-center
+  items-center
+  text-center
+  leading-relaxed text-[0.6875rem] sm:text-[0.875rem] md:text-[1.25rem] font-semibold text-purple-700">
 
         💬
 
         <transition name="fade" mode="out-in">
-          <div :key="currentPage" class="flex items-center whitespace-nowrap ml-[0.5rem]">
+          <div :key="currentPage" class="flex flex-wrap
+    justify-center
+    items-center
+    gap-1">
 
             <span
               v-for="(word, index) in currentSentenceData.words"
@@ -181,20 +188,31 @@
 <!-- WHITE CONTROL BOX -->
 <div
   class="
-       w-[90%] sm:w-full
-       max-w-xl mx-auto mt-[1.5rem]
-       relative z-10 bg-white shadow-xl
-       border-[0.25rem] border-pink-100
-       px-[0.5rem] sm:px-[1.5rem]
-       py-[0.375rem]
-       rounded-full sm:rounded-[3.125rem]
+      w-full
+    max-w-5xl
+    mx-auto
+    mt-4
+    relative z-10
+    bg-white
+    shadow-xl
+    border-4 border-pink-100
+    px-3 sm:px-6
+    py-3
+    rounded-3xl sm:rounded-full
   "
 >
 
-  <div class="flex items-center justify-center gap-[1rem] sm:gap-[1.25rem] flex-nowrap">
+  <div class=" flex
+      flex-wrap
+      justify-center
+      items-center
+      gap-4">
 
     <!-- DOTS -->
-    <div class="flex items-center gap-[0.75rem] sm:gap-[0.75rem] shrink-0">
+    <div class="flex
+        flex-wrap
+        justify-center
+        gap-2">
       <div
         v-for="(p, index) in story.pages"
         :key="index"
@@ -296,6 +314,7 @@ import NotFound from "../components/NotFound.vue"
 import { useRoute } from "vue-router"
 import Loadder from "../components/Loadder.vue"
 import MobileHint from "../components/ForMobile.vue"
+import api from '../services/Api.js';
 
 import router from "../router"
 
@@ -304,6 +323,8 @@ const global = globalStore()
 
 
 const popSound = new Audio("../assets/sounds/pop.wav")
+
+
 
 
 
@@ -384,7 +405,7 @@ let animationFrame = null
 let currentAudio = null
 
 
-const stories = ref([])
+const story= ref(null)
 const loading = ref(true)
 
 const loadStories = async () => {
@@ -395,16 +416,14 @@ const loadStories = async () => {
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
     // fake API call
-    const response = await fetch("../storyPage.json")
-    console.log('Response:', response) // log the raw response
+    // const response = await fetch("../storyPage.json")
+    const response = await api.get('/stories/' + route.params.id);
+    console.log("Loaded story back:", response.data['data'])
 
-    // convert json
-    const data = await response.json()
-    console.log('Parsed data:', data) // log the parsed data
+    // await new Promise((r) => setTimeout(r, 1000))
 
-    // pass data to model
-    stories.value = data
-    console.log("Loaded stories mp3:", story.value.pages[currentPage.value].audio) // log the loaded stories
+    story.value = response.data['data']
+    console.log("Loaded story mp3:", story.value.pages[currentPage.value].audio) // log the loaded story
   } catch (error) {
     console.log(error)
   } finally {
@@ -420,17 +439,17 @@ onMounted(() => {
 
 
 /* ================= STORY ================= */
-const story = computed(() =>
-  stories.value.find((s) => s.id === Number(route.params.id))
+// const story = computed(() =>
+//   stories.value.find((s) => s.id === Number(route.params.id))
   
-)
+// )
 console.log("Current story:", story) // log the current story
 /* ================= CURRENT SENTENCE ================= */
 const currentSentenceData = computed(() => {
   return story.value.pages[currentPage.value].sentences[currentSentence.value]
 })
 
-console.log("Current sentence data:", currentSentenceData)
+console.log("Current sentence data:", currentSentenceData) // log the current sentence data
 console.log("Is kid subscribed:", global.isKidSubscribed) // log the current sentence data
 
 /* ================= AUDIO ================= */
@@ -447,7 +466,7 @@ const playStoryFromPage = () => {
   }
 
   // ✅ free pages
-  else if (currentPage.value < 2) {
+  else if (currentPage.value < 8) {
 
     playAudio(
       story.value.pages[currentPage.value].audio
@@ -478,7 +497,7 @@ const playAudio = (audioFile) => {
   audio.play()
 
   const sync = () => {
-    const time = audio.currentTime
+    const time = audio.currentTime*1000
     const sentence = page.sentences[currentSentence.value]
 
     if (!sentence) return
@@ -540,6 +559,7 @@ const nextPage = () => {
   if (currentPage.value < story.value.pages.length - 1) {
     currentPage.value++
     stopAudio()
+    
   }
 }
 

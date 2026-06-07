@@ -80,7 +80,7 @@
             "
           >
 
-            <StoryCard
+            <StoryCard 
               v-for="story in featuredStories"
               :key="story.id"
               :story="story"
@@ -141,6 +141,7 @@ import catergory from "../components/Catergory.vue"
 import Loadder from "../components/Loadder.vue"
 import NavBar from "../components/NavBar.vue"
 import api from '../services/Api.js';
+import { Story } from '../models/Story.js';
 
 const heroIndex = ref(0)
 const featuredStories = ref([])
@@ -203,11 +204,13 @@ const loadStories = async () => {
 
    try {
         const response = await api.get('/stories');
-        console.log("Loaded stories back: " + response.data[0].title);
+        console.log("Loaded stories back: " + response.data);
 
           const data = await response.data;
-
-          featuredStories.value = data
+          featuredStories.value = data.map(item => new Story(item));
+          // console.log('Parsed data:', featuredStories.value) // log the parsed data
+          // featuredStories.value = data
+          // console.log('Parsed data22:', data) // log the parsed data
     } catch (error) {
         console.error(error);
     }

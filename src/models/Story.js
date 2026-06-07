@@ -1,9 +1,12 @@
 export class Story {
-  constructor(id, title, image, audio, pages) {
-    this.id = id
-    this.title = title
-    this.image = image
-    this.audio = audio
-    this.pages = pages
+  constructor(data) {
+    this.id = data.id
+    this.title = data.title
+    this.description = data.description
+    this.image = data.image // 👈 API field name
+  }
+
+  get coverUrl() {
+    return this.image
   }
 }
