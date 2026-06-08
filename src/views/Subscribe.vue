@@ -23,7 +23,7 @@
 
       <!-- TITLE -->
       <h1 class="mt-6 text-4xl md:text-6xl font-extrabold text-purple-700">
-        Subscribe & Read
+        Subscribe & Read  {{ g }}
       </h1>
 
       <p class="mt-4 text-lg md:text-2xl text-gray-600 leading-8">

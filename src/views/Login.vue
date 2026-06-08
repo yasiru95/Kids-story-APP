@@ -77,6 +77,7 @@ import { reactive, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { globalStore } from "../pinaGlobal/global";
+import api from "../services/api"; // Assuming you have an api.js file for axios instance
 
 const global = globalStore();
 const router = useRouter();
@@ -129,8 +130,8 @@ const handleLogin = async () => {
   try {
     loading.value = true;
 
-    const response = await axios.post(
-      "https://api.mysite.com/api/login",
+    const response = await api.post(
+      "/login",
       {
         email: form.email,
         password: form.password,
@@ -141,12 +142,11 @@ const handleLogin = async () => {
     localStorage.setItem("user", JSON.stringify(response.data.user));
 
     successMessage.value = "🎉 Welcome back to Kids Story World!";
+    global.login(response.data.user, response.data.token)
 
-    global.login();
-
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1000);
+    // setTimeout(() => {
+    //   router.push("/dashboard");
+    // }, 1000);
 
   } catch (error) {
     if (error.response?.status === 422) {
@@ -155,6 +155,7 @@ const handleLogin = async () => {
       Object.keys(backendErrors).forEach((key) => {
         if (errors[key] !== undefined) {
           errors[key] = backendErrors[key][0];
+          alert(errors[key]);
         }
       });
     } else if (error.response?.status === 401) {

@@ -466,7 +466,7 @@ const playStoryFromPage = () => {
   }
 
   // ✅ free pages
-  else if (currentPage.value < 8) {
+  else if (currentPage.value < 2) {
 
     playAudio(
       story.value.pages[currentPage.value].audio

@@ -139,7 +139,7 @@
                 <label
                   class="group cursor-pointer rounded-3xl border-4 p-5 transition hover:scale-105 hover:shadow-2xl"
                   :class="
-                    form.gender === 'boy'
+                    form.gender === 'B'
                       ? 'border-blue-500 bg-blue-100'
                       : 'border-blue-100 bg-blue-50'
                   "
@@ -147,7 +147,7 @@
                   <input
                     v-model="form.gender"
                     type="radio"
-                    value="boy"
+                    value="B"
                     class="hidden"
                   />
 
@@ -172,7 +172,7 @@
                 <label
                   class="group cursor-pointer rounded-3xl border-4 p-5 transition hover:scale-105 hover:shadow-2xl"
                   :class="
-                    form.gender === 'girl'
+                    form.gender === 'G'
                       ? 'border-pink-500 bg-pink-100'
                       : 'border-pink-100 bg-pink-50'
                   "
@@ -180,7 +180,7 @@
                   <input
                     v-model="form.gender"
                     type="radio"
-                    value="girl"
+                    value="G"
                     class="hidden"
                   />
 
@@ -329,7 +329,7 @@
               </p>
 
               <router-link
-                to="/login"
+              :to="{ path: '/login', query: { isAgeGate: 'log' } }"
                 class="mt-4 inline-block rounded-full bg-purple-100 px-8 py-3 text-lg font-bold text-purple-700 transition hover:scale-105 hover:bg-purple-200"
               >
                 🎈 Login Here
@@ -344,6 +344,10 @@
 
 <script setup>
 import { reactive, computed, ref } from "vue";
+import api from "../services/api"; // Assuming you have an api.js file for axios instance
+
+import { useRouter, useRoute } from "vue-router"
+const router = useRouter()
 
 const successMessage = ref("");
 
@@ -447,9 +451,8 @@ const submitForm = async () => {
   try {
     loading.value = true;
 
-    const response = await axios.post(
-      "https://your-api.com/api/register",
-      {
+    const response = await api.post(
+      "/register",{
         name: form.name,
         email: form.email,
         gender: form.gender,
@@ -462,7 +465,7 @@ const submitForm = async () => {
       "🎉 Hooray! Your magical account has been created!";
       alert(successMessage.value);
 
-    console.log(response.data);
+    console.log('register response: ' + response.data);
 
     // reset form
     form.name = "";
@@ -472,16 +475,20 @@ const submitForm = async () => {
     form.password_confirmation = "";
     form.terms = false;
 
+    router.push('/parent-login');
+
   } catch (error) {
     console.log(error);
 
     // Laravel validation errors
     if (error.response?.status === 422) {
       const backendErrors = error.response.data.errors;
+      console.log('Backend validation errors:', backendErrors);
 
       Object.keys(backendErrors).forEach((key) => {
         if (errors[key] !== undefined) {
           errors[key] = backendErrors[key][0];
+          alert(errors[key]);
         }
       });
     } else {
