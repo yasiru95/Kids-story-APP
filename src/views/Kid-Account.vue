@@ -1,4 +1,6 @@
 <template>
+  <NavBar />
+
   <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 p-6">
 
    
@@ -15,7 +17,7 @@
 
         <div>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-purple-700">
-            {{ kid.name }}
+          {{ global.userLogin.name }}
           </h2>
 
           <p class="text-gray-500 font-semibold">
@@ -30,7 +32,7 @@
 
         <!-- ACTIVE -->
         <div
-          v-if="isSubscribed"
+          v-if="subscriptionData?.has_subscription"
           class="bg-green-50 border-4 border-green-200 rounded-3xl p-6 shadow-lg"
         >
 
@@ -45,20 +47,26 @@
 
               <p class="text-green-600 font-semibold mt-1">
                 Expires on:
-                <span class="font-bold">{{ expiryDate }}</span>
+                <span class="font-bold"> {{ subscriptionData?.subscription?.end_date }}</span>
               </p>
 
               <p class="text-green-500 mt-2">
                 🌟 Enjoy unlimited magical stories!
               </p>
+              <p class="text-green-500 mt-2">{{ daysRemaining }} days remaining</p>
             </div>
 
           </div>
 
+          <!-- <p class="text-green-500 mt-2">
+          <br>
+          {{ daysRemaining }} days remaining
+          </p> -->
+
           <!-- PROGRESS BAR -->
-          <div class="mt-5 w-full bg-green-100 rounded-full h-3 overflow-hidden">
+          <!-- <div class="mt-5 w-full bg-green-100 rounded-full h-3 overflow-hidden">
             <div class="bg-green-400 h-3 w-[70%] rounded-full"></div>
-          </div>
+          </div> -->
 
         </div>
 
@@ -83,7 +91,7 @@
           </div>
 
           <router-link
-            to="/subscribe"
+            to="/subscribe?isAgeGate=subs"
             class="mt-6 inline-block bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold px-10 py-4 rounded-full shadow-2xl hover:scale-105 transition"
           >
             🌈 Subscribe Now
@@ -103,19 +111,39 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
-console.log("Kid Account View Loaded")
+import { ref, onMounted, computed } from "vue"
+import NavBar from "../components/NavBar.vue"
+import { globalStore } from "../pinaGlobal/global"
+const global = globalStore();
+const subscriptionData = ref(null)
 
-/* 👤 Kid Data (replace with API later) */
-const kid = ref({
-  name: "Little Explorer"
+const daysRemaining = computed(() => {
+  if (!subscriptionData.value?.subscription) return 0
+
+  const end = new Date(subscriptionData.value.subscription.end_date)
+  const now = new Date()
+
+  return Math.max(
+    Math.ceil((end - now) / (1000 * 60 * 60 * 24)),
+    0
+  )
 })
 
+onMounted(async () => {
+   subscriptionData.value =await global.checkSubscription();
+
+})
+
+/* 👤 Kid Data (replace with API later) */
+// const kid = ref({
+//   name: "Little Explorer"
+// })
+
 /* 💳 Subscription Status */
-const isSubscribed = ref(false)
+// const isSubscribed = ref(true) // Change to false to test non-subscribed state
 
 /* 📅 Expiry Date */
-const expiryDate = ref("2026-12-31")
+// const expiryDate = ref("2026-12-31")
 </script>
 
 <style scoped>

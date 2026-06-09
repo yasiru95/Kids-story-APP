@@ -18,7 +18,7 @@
     </div>
 
     <!-- CATEGORIES -->
-    <catergory :featuredStories="featuredStories" />
+    <!-- <catergory :featuredStories="featuredStories" /> -->
     
 
     <!-- books -->
@@ -200,7 +200,7 @@ const getCardWidth = () => cardWidth.value
 const loadStories = async () => {
   loading.value = true
 
-  await new Promise((r) => setTimeout(r, 2000))
+  // await new Promise((r) => setTimeout(r, 2000))
 
    try {
         const response = await api.get('/stories');

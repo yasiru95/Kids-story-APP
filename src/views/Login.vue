@@ -137,6 +137,7 @@ const handleLogin = async () => {
         password: form.password,
       }
     );
+    global.isLoggedIn = true;
 
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("user", JSON.stringify(response.data.user));

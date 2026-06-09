@@ -1,4 +1,6 @@
 <template>
+    <NavBar />
+
   <div
     class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 flex items-center justify-center px-4 py-10 relative overflow-hidden"
   >
@@ -23,12 +25,12 @@
 
       <!-- TITLE -->
       <h1 class="mt-6 text-4xl md:text-6xl font-extrabold text-purple-700">
-        Subscribe & Read  {{ g }}
+        Subscribe & Read  
       </h1>
 
       <p class="mt-4 text-lg md:text-2xl text-gray-600 leading-8">
         Unlock magical stories every day ✨  
-        Explore 1000+ kids stories with new ones added daily 📚
+        Explore 1000+ kids stories with new ones added monthly  📚
       </p>
 
       <!-- FEATURES -->
@@ -89,6 +91,7 @@
 
       <!-- BUTTON -->
       <button
+      @click="payment"
         class="mt-10 w-full md:w-auto px-12 py-5 rounded-full text-2xl font-extrabold text-white shadow-2xl
         bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500
         hover:scale-110 transition"
@@ -106,4 +109,102 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue"
+import { globalStore } from "../pinaGlobal/global"
+import api from "../services/Api.js"
+import { useRoute } from "vue-router"
+import router from "../router"
+import NavBar from "../components/NavBar.vue"
+
+const route = useRoute()
+
+const global = globalStore()
+
+
+const payment = async () => {
+
+  if(global.isLoggedIn==true){
+    try {
+    const response = await api.post(
+  '/payments',
+  {
+    user_id: global.userLogin.id,
+    amount: 249,
+    payment_id: "pay_1234567890",
+    payment_method: "google_pay",
+    transaction_id: "txn_1234567890",
+    currency: "USD",
+    is_subscription: true
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${global.userLogin.token}`
+    }
+  }
+)
+if (response.data.success===true) {
+  alert("Payment successful! Thank you for subscribing.")
+  global.isKidSubscribed = true
+  router.push('/')
+} else {
+  alert("Payment failed. Please try again.")
+}
+
+
+
+
+
+} catch (error) {
+  alert("Payment failed. Please try again.")
+
+  // Laravel responded with an error
+  if (error.response) {
+
+    console.error('Status:', error.response.status)
+    console.error('Backend Error:', error.response.data)
+
+    // Validation errors (422)
+    if (error.response.status === 422) {
+      console.log(error.response.data.errors)
+    }
+
+    // Unauthorized (401)
+    else if (error.response.status === 401) {
+      alert(error.response.data.message || 'Unauthorized')
+    }
+
+    // Forbidden (403)
+    else if (error.response.status === 403) {
+      alert(error.response.data.message || 'Access denied')
+    }
+
+    // Not found (404)
+    else if (error.response.status === 404) {
+      alert(error.response.data.message || 'Resource not found')
+    }
+
+    // Server error (500)
+    else if (error.response.status === 500) {
+      alert(error.response.data.message || 'Server error')
+    }
+
+  }
+  // No response from server
+  else if (error.request) {
+    console.error('No response from server')
+    alert('Cannot connect to server')
+  }
+  // Other error
+  else {
+    console.error(error.message)
+    alert(error.message)
+  }
+}
+  }else{
+    alert('Registration required to subscribe. Redirecting to registration page.')
+    router.push("/register?isAgeGate=reg")
+  }
+} 
+
+
 </script>

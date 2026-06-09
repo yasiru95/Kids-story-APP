@@ -1,4 +1,5 @@
 ﻿<template>
+  <NavBar />
   <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 py-[2.5rem] px-[1rem] overflow-hidden">
 
     <!-- BACK -->
@@ -37,7 +38,6 @@
   >
     🎧 Play Story
   </button>
-
   <!-- FULLSCREEN -->
   <button
     @click="toggleHeroFullScreen"
@@ -46,6 +46,8 @@
   >
     ⛶ Full Screen
   </button>
+
+  
 
 </div>
 
@@ -311,6 +313,8 @@ import {
   onUnmounted
 } from "vue"
 import NotFound from "../components/NotFound.vue"
+import NavBar from "../components/NavBar.vue"
+
 import { useRoute } from "vue-router"
 import Loadder from "../components/Loadder.vue"
 import MobileHint from "../components/ForMobile.vue"
@@ -323,6 +327,78 @@ const global = globalStore()
 
 
 const popSound = new Audio("../assets/sounds/pop.wav")
+
+
+const checkSubscription = async () => {
+
+  console.log("Checking subscription for user:", global.userLogin.token)
+
+try {
+  const response = await api.get('/subscription', {
+    headers: {
+      Authorization: `Bearer ${global.userLogin.token}`
+    },
+    params: {
+      user_id: global.userLogin.id,
+    }
+  })
+
+  console.log('Subscription data:', response.data.has_subscription)
+  global.isKidSubscribed = response.data.has_subscription
+  console.log("Updated subscription status in global store:", global.userLogin.isKidSubscribed)
+
+} catch (error) {
+
+  // Laravel responded with an error
+  if (error.response) {
+
+    console.error('Status:', error.response.status)
+    console.error('Backend Error:', error.response.data)
+
+    // Validation errors (422)
+    if (error.response.status === 422) {
+      console.log(error.response.data.errors)
+    }
+
+    // Unauthorized (401)
+    else if (error.response.status === 401) {
+      alert(error.response.data.message || 'Unauthorized')
+    }
+
+    // Forbidden (403)
+    else if (error.response.status === 403) {
+      alert(error.response.data.message || 'Access denied')
+    }
+
+    // Not found (404)
+    else if (error.response.status === 404) {
+      alert(error.response.data.message || 'Resource not found')
+    }
+
+    // Server error (500)
+    else if (error.response.status === 500) {
+      alert(error.response.data.message || 'Server error')
+    }
+
+  }
+  // No response from server
+  else if (error.request) {
+    console.error('No response from server')
+    alert('Cannot connect to server')
+  }
+  // Other error
+  else {
+    console.error(error.message)
+    alert(error.message)
+  }
+}
+
+
+  // if (!global.isKidSubscribed) {
+  //  alert( JSON.parse(user).id)
+
+  // }
+}
 
 
 
@@ -371,6 +447,7 @@ const handleFullScreenChange = () => {
 
 onMounted(() => {
   loadStories()
+  checkSubscription()
 
   document.addEventListener(
     "fullscreenchange",
@@ -413,7 +490,7 @@ const loadStories = async () => {
     loading.value = true
 
       // simulate API loading
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // await new Promise((resolve) => setTimeout(resolve, 2000))
 
     // fake API call
     // const response = await fetch("../storyPage.json")
