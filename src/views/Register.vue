@@ -344,7 +344,7 @@
 
 <script setup>
 import { reactive, computed, ref } from "vue";
-import api from "../services/api"; // Assuming you have an api.js file for axios instance
+import api from "../services/Api"; // Assuming you have an api.js file for axios instance
 
 import { useRouter, useRoute } from "vue-router"
 const router = useRouter()

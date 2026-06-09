@@ -77,7 +77,7 @@ import { reactive, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { globalStore } from "../pinaGlobal/global";
-import api from "../services/api"; // Assuming you have an api.js file for axios instance
+import api from "../services/Api"; // Assuming you have an api.js file for axios instance
 
 const global = globalStore();
 const router = useRouter();
