@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'https://132.145.72.192/api',
+    baseURL: 'https://kidsstoryflix.co.uk/api',
     headers: {
         'Content-Type': 'application/json'
     }
