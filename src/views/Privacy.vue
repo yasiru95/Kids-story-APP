@@ -1,4 +1,5 @@
 <template>
+  <NavBar />
   <div class="min-h-screen bg-gradient-to-b from-pink-100 via-blue-100 to-yellow-100 p-6">
 
     <div class="max-w-4xl mx-auto bg-white rounded-[2.5rem] shadow-2xl border-4 border-pink-100 p-8">
@@ -68,3 +69,6 @@
 
   </div>
 </template>
+<script setup>
+import NavBar from "../components/NavBar.vue"
+</script>
