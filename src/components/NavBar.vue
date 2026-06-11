@@ -40,12 +40,7 @@
         <!-- LOGGED IN -->
         <template v-if="global.isLoggedIn">
 
-          <router-link
-            to="/"
-            class="px-4 py-2 rounded-full text-sm lg:text-base font-bold text-purple-700 hover:bg-pink-100 hover:text-pink-600 transition cursor-pointer"
-          >
-            🏠 Home
-          </router-link>
+      
 
           <router-link
             to="/kid-account"
@@ -65,6 +60,13 @@
 
         <!-- NOT LOGGED IN -->
         <template v-else>
+
+          <router-link
+            to="/"
+            class="px-4 py-2 rounded-full text-sm lg:text-base font-bold text-purple-700 hover:bg-pink-100 hover:text-pink-600 transition cursor-pointer"
+          >
+            🏠 Home
+          </router-link>
 
           <router-link
             :to="{ path: '/login', query: { isAgeGate: 'log' } }"
@@ -114,12 +116,7 @@
           <!-- LOGGED IN -->
           <template v-if="global.isLoggedIn">
 
-            <router-link
-              to="/"
-              class="rounded-2xl bg-pink-50 px-5 py-4 text-lg font-bold text-purple-700 hover:bg-pink-100 transition"
-            >
-              🏠 Home
-            </router-link>
+         
 
             <router-link
               to="/kid-account"
@@ -139,6 +136,13 @@
 
           <!-- NOT LOGGED IN -->
           <template v-else>
+
+            <router-link
+              to="/"
+              class="rounded-2xl bg-pink-50 px-5 py-4 text-lg font-bold text-purple-700 hover:bg-pink-100 transition"
+            >
+              🏠 Home
+            </router-link>
 
             <router-link
               :to="{ path: '/login', query: { isAgeGate: 'log' } }"
