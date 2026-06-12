@@ -52,140 +52,153 @@
 </div>
 
 <!-- HERO -->
-<div
+ <div
   ref="heroRef"
-  class="relative
-    overflow-hidden
-    shadow-2xl
-    border-[0.25rem] sm:border-[0.375rem]
-    border-white
-    w-full
-    h-[15rem] sm:h-[26rem] md:h-[32rem] lg:h-[38rem] xl:h-[44rem]
-    rounded-[1.75rem] sm:rounded-[2.5rem]
-    bg-black,     isFullScreen"
+  :class="[
+    'relative overflow-hidden shadow-2xl border-4 border-white w-full aspect-[16/9] sm:h-[26rem] md:h-[32rem] lg:h-[38rem] xl:h-[44rem] rounded-[1.5rem] sm:rounded-[2.5rem] bg-black',
+
+    isIOS && isFullScreen ? 'story-fullscreen-mode' : ''
+  ]"
 >
 
+<!-- <div
+  ref="heroRef"
+  class="relative overflow-hidden shadow-2xl border-4 border-white
+         w-full aspect-[16/9]
+         sm:h-[26rem] md:h-[32rem] lg:h-[38rem] xl:h-[44rem]
+         rounded-[1.5rem] sm:rounded-[2.5rem] bg-black"
+> -->
+
   <!-- IMAGE -->
-  <transition 
+  <transition
     mode="out-in"
     enter-active-class="transition-all duration-500 ease-out"
     leave-active-class="transition-all duration-500 ease-in"
-    enter-from-class="opacity-0 translate-x-[2.5rem]"
+    enter-from-class="opacity-0 translate-x-10"
     enter-to-class="opacity-100 translate-x-0"
     leave-from-class="opacity-100 translate-x-0"
-    leave-to-class="opacity-0 -translate-x-[2.5rem]"
+    leave-to-class="opacity-0 -translate-x-10"
   >
     <img
       :key="currentPage"
       :src="story.pages[currentPage].img"
-      class="absolute inset-0 w-full h-full object-contain md:object-cover"
+      class="absolute inset-0 w-full h-full object-cover"
+      alt="Story Image"
     />
   </transition>
 
-  <!-- DARK OVERLAY -->
-  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+  <!-- OVERLAY -->
+  <div
+    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+  ></div>
 
-  <!-- TOP TITLE -->
-  <div class="absolute top-[1rem] left-1/2 -translate-x-1/2 w-full px-[1rem] flex justify-center">
-
-    <div class="bg-white/90 backdrop-blur-md px-[1rem] md:px-[2rem] py-[0.5rem] md:py-[1rem] rounded-full shadow-xl border-[0.125rem] border-pink-200 text-center animate-float max-w-[95%]">
-
-      <h1 class="text-[0.575rem] sm:text-[1.25rem] md:text-[1.35rem] lg:text-[1.50rem] font-extrabold text-pink-600 truncate">
+  <!-- TITLE -->
+  <div
+    class="absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 w-full px-2 flex justify-center"
+  >
+    <div
+      class="bg-white/90 backdrop-blur-md px-3 sm:px-6 py-2 rounded-full
+             shadow-xl border-2 border-pink-200 max-w-[95%]"
+    >
+      <h1
+        class="text-[10px] sm:text-lg md:text-xl lg:text-2xl
+               font-extrabold text-pink-600 truncate"
+      >
         {{ story.title }}
       </h1>
-
     </div>
-
   </div>
 
-  <!-- LEFT -->
+  <!-- STAR -->
+  <div
+    class="absolute top-14 left-3 sm:left-6 text-xl sm:text-3xl animate-bounce"
+  >
+    🌟
+  </div>
+
+  <!-- PREV -->
   <button
     @click="prevPage"
-    class="absolute left-[0.5rem] md:left-[1.5rem] top-1/2 -translate-y-1/2 
-           w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem]
-           rounded-full bg-white/90 hover:bg-white shadow-2xl 
-           flex items-center justify-center 
-           text-[1.5rem] md:text-[2rem] 
-           text-purple-600 hover:scale-110 transition"
+    class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2
+           w-10 h-10 sm:w-14 sm:h-14
+           rounded-full bg-white/90 shadow-xl
+           flex items-center justify-center
+           text-lg sm:text-2xl text-purple-600
+           hover:scale-110 transition"
   >
     ❮
   </button>
 
-  <!-- RIGHT -->
+  <!-- NEXT -->
   <button
     @click="nextPage"
-    class="absolute right-[0.5rem] md:right-[1.5rem] top-1/2 -translate-y-1/2 
-           w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem]
-           rounded-full bg-white/90 hover:bg-white shadow-2xl 
-           flex items-center justify-center 
-           text-[1.5rem] md:text-[2rem] 
-           text-purple-600 hover:scale-110 transition"
+    class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2
+           w-10 h-10 sm:w-14 sm:h-14
+           rounded-full bg-white/90 shadow-xl
+           flex items-center justify-center
+           text-lg sm:text-2xl text-purple-600
+           hover:scale-110 transition"
   >
     ❯
   </button>
 
-  <!-- FLOATING -->
-  <div class="absolute top-[4rem] left-[1.5rem] text-[1.875rem] md:text-[2.5rem] animate-bounce">
-    🌟
+  <!-- STORY TEXT -->
+  <div
+  class="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2
+         w-[95%] sm:w-[90%]
+         flex justify-center"
+>
+  <div
+    class="bg-white/50 backdrop-blur-md
+           px-3 sm:px-5 py-2 sm:py-3
+           rounded-2xl sm:rounded-full
+           border border-white/80
+           shadow-xl
+           h-[2.7rem] sm:h-auto 
+           overflow-hidden
+           max-w-full"
+  >
+    <transition name="fade" mode="out-in">
+      <div
+        :key="currentPage"
+        class="text-center leading-relaxed"
+      >
+        <span class="mr-2">💬</span>
+
+        <span
+          v-for="(word, index) in currentSentenceData.words"
+          :key="index"
+          @click="playStoryFromPage"
+          class="
+            inline-block
+            mx-[3px]
+            sm:mx-[4px]
+            py-[1px]
+            text-[12px]
+            sm:text-[15px]
+            md:text-[20px]
+            font-semibold
+            cursor-pointer
+            transition-all duration-300
+          "
+          :class="[
+            activeWordIndex === index
+             ? 'text-highlight scale-105 shadow-md'
+                  : 'text-outline',
+              // ? 'text-pink-600 scale-110'
+              // : 'text-gray-800'
+          ]"
+        >
+          {{ word.text }}
+        </span>
+
+      </div>
+    </transition>
   </div>
-
-  <!-- TEXT BOX -->
-  <div class="absolute bottom-[1rem] left-1/2 -translate-x-1/2 w-full flex justify-center px-[0.5rem]">
-  
-    <div class="relative 
-                bg-white/20 backdrop-blur-md 
-                px-[0.75rem] py-[0.375rem] md:px-[1.5rem] md:py-[0.75rem] 
-                rounded-full md:rounded-[2.5rem] 
-                shadow-xl border-[0.125rem] md:border-[0.25rem] border-blue-100 
-                max-w-[95%] md:max-w-fit
-                overflow-hidden">
-
-      <p class="flex flex-wrap
-  justify-center
-  items-center
-  text-center
-  leading-relaxed text-[0.6875rem] sm:text-[0.875rem] md:text-[1.25rem] font-semibold text-purple-700">
-
-        💬
-
-        <transition name="fade" mode="out-in">
-          <div :key="currentPage" class="flex flex-wrap
-    justify-center
-    items-center
-    gap-1">
-
-            <span
-              v-for="(word, index) in currentSentenceData.words"
-              :key="index"
-              @click="playStoryFromPage"
-              class="
-              inline-block 
-              mx-[0.125rem] sm:mx-[0.25rem] 
-              px-[0.125rem] sm:px-[0.25rem] 
-              py-[0.0625rem] sm:py-[0.125rem] 
-              rounded-[0.375rem] sm:rounded-[0.5rem] 
-              text-[0.5rem] sm:text-[0.875rem] md:text-[2rem]
-              transition-all duration-300 cursor-pointer
-              hover:scale-110 hover:shadow-md
-              "
-              :class="[
-                activeWordIndex === index
-                  ? 'text-highlight scale-105 shadow-md'
-                  : 'text-outline'
-              ]"
-            >
-              {{ word.text }}
-            </span>
-
-          </div>
-        </transition>
-
-      </p>
-
-    </div>
-  </div>
+</div>
 
 </div>
+
 
 <!-- WHITE CONTROL BOX -->
 <div
@@ -330,10 +343,11 @@ const popSound = new Audio("../assets/sounds/pop.wav")
 
 
 const checkSubscription = async () => {
+  console.log("Checking subscription for user ID:", global.userLogin.id)
 
-  console.log("Checking subscription for user:", global.userLogin.token)
 
 try {
+
   const response = await api.get('/subscription', {
     headers: {
       Authorization: `Bearer ${global.userLogin.token}`
@@ -343,9 +357,7 @@ try {
     }
   })
 
-  console.log('Subscription data:', response.data.has_subscription)
   global.isKidSubscribed = response.data.has_subscription
-  console.log("Updated subscription status in global store:", global.userLogin.isKidSubscribed)
 
 } catch (error) {
 
@@ -415,18 +427,27 @@ function playPop() {
 
 const heroRef = ref(null)
 const isFullScreen = ref(false)
+const isIOS = ref(false)
 
 const toggleHeroFullScreen = async () => {
     isFullScreen.value = !isFullScreen.value
-  const el = heroRef.value
+ const el = heroRef.value
+  if (!el) return
 
-  if (!document.fullscreenElement) {
-    await el.requestFullscreen()
-    playStoryFromPage()
-    isFullScreen.value = true
-  } else {
-    await document.exitFullscreen()
-    isFullScreen.value = false
+  try {
+    if (!document.fullscreenElement) {
+      await el.requestFullscreen?.()
+      playStoryFromPage()
+    } else {
+      await document.exitFullscreen?.()
+    }
+  } catch (e) {
+    // fallback for iOS Safari
+    document.body.style.position = "fixed"
+    document.body.style.top = "0"
+    document.body.style.left = "0"
+    document.body.style.width = "100%"
+    document.body.style.height = "100%"
   }
 }
 
@@ -446,8 +467,12 @@ const handleFullScreenChange = () => {
 /* ================= MOUNT ================= */
 
 onMounted(() => {
+  isIOS.value = /iPhone|iPad|iPod/i.test(navigator.userAgent)
   loadStories()
-  checkSubscription()
+  if (global.userLogin?.token) {
+    console.log("User logged in, checking subscription...") 
+    checkSubscription()
+  }
 
   document.addEventListener(
     "fullscreenchange",
@@ -508,9 +533,7 @@ const loadStories = async () => {
   }
 }
 
-onMounted(() => {
-  loadStories()
-})
+
 
 /* ================= STORY ================= */
 
@@ -663,6 +686,10 @@ watch(
     stopAudio()
   }
 )
+//Stop page scroll when fullscreen ON:
+watch(isFullScreen, (val) => {
+  document.body.style.overflow = val ? 'hidden' : ''
+})
 
 
 const pageInput = ref("")
@@ -686,6 +713,22 @@ const jumpToPage = () => {
 </script>
 
 <style scoped>
+
+.story-fullscreen-mode {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  z-index: 9999;
+  overflow: hidden;
+  background: black;
+}
+
+
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.4s ease;
@@ -783,5 +826,8 @@ const jumpToPage = () => {
              0  3px 0 #000;
     }
 }
+
+
+
 
 </style>
