@@ -11,6 +11,9 @@ import KidAccount from "../views/Kid-Account.vue"
 import privcyPolicy from "../views/Privacy.vue"
 import Terms from "../views/Terms.vue"
 import Refund from "../views/Refund.vue"
+import SucessPagePayment from "../views/SucessPagePayment.vue"
+import ErrorPagePayment from "../views/ErrorPagePayment.vue"
+
 
 
 const routes = [
@@ -74,6 +77,14 @@ const routes = [
   {
     path: "/refund",
     component: Refund,
+  },
+  {
+    path: "/SucessPagePayment",
+    component: SucessPagePayment,
+  },
+  {
+    path: "/ErrorPagePayment",
+    component: ErrorPagePayment,
   }
 ]
 

@@ -98,10 +98,10 @@
   >
     <div
       class="bg-white/90 backdrop-blur-md px-3 sm:px-6 py-2 rounded-full
-             shadow-xl border-2 border-pink-200 max-w-[95%]"
+             shadow-xl border-2 border-pink-200 max-w-[80%] "
     >
       <h1
-        class="text-[10px] sm:text-lg md:text-xl lg:text-2xl
+        class="text-[0.25rem] sm:text-lg md:text-xl lg:text-2xl
                font-extrabold text-pink-600 truncate"
       >
         {{ story.title }}

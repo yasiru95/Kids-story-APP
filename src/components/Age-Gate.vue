@@ -1,4 +1,5 @@
 <template>
+  <nav-bar />
   <div
     v-if="showGate"
   class="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm px-4 py-6 overflow-y-auto flex items-start sm:items-center justify-center"  >
@@ -122,6 +123,7 @@ import { ref, onMounted, onUnmounted } from "vue"
 //pass data from NavBar to here using route query
 
 import { useRouter, useRoute } from "vue-router"
+import NavBar from "./NavBar.vue"
 const route = useRoute()
 const router = useRouter()
 const isAgeGate = route.query.isAgeGate
